@@ -51,6 +51,7 @@ const LoginScreen = ({ navigation }) => {
                 placeholder="Zadajte mail"
                 style={styles.input}
                 onChangeText={text => setEmail(text)}
+                autoCapitalize='none'
             />
             <TextInput
                 value={password}
