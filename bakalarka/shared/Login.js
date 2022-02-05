@@ -34,7 +34,6 @@ const LoginScreen = ({ navigation }) => {
         .then(() => {
             setEmail('')
             setPassword('')
-            navigation.navigate('Home') 
         })
         .catch(error => alert(error.message))
     }

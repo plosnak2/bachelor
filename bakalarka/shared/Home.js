@@ -8,13 +8,11 @@ import { UsersRef } from "../firebasecfg";
 const Home = ({ navigation }) => {
     useEffect(async () => {
         const result = await AsyncStorage.getItem('email');
-        console.log(result)
         const user = await UsersRef.doc(result).get();
-        console.log(user.data().coach)
         if(user.data().coach === false){
-            navigation.navigate('HomeTrainee')
+            navigation.replace('HomeTrainee')
         } else {
-            navigation.navigate('HomeTrainer')
+            navigation.replace('HomeTrainer')
         }
       
     }, [])

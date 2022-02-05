@@ -5,9 +5,10 @@ import LoginScreen from './shared/Login';
 import Home from './shared/Home';
 import HomeTrainee from './trainee/HomeTrainee';
 import HomeTrainer from './trainer/HomeTrainer';
+import { LogBox } from 'react-native';
 
 const Stack = createNativeStackNavigator();
-
+LogBox.ignoreLogs(['Setting a timer for a long period of time'])
 export default function App() {
   return (
     <NavigationContainer>
@@ -18,7 +19,13 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/>
-        <Stack.Screen name="HomeTrainee" component={HomeTrainee} />
+        <Stack.Screen name="HomeTrainee" component={HomeTrainee} options={{
+           title: 'Chat',
+           headerStyle: {
+            backgroundColor: '#c4c4c4'
+          },
+          headerTitleAlign: 'center',
+        }}/>
         <Stack.Screen name="HomeTrainer" component={HomeTrainer} />
       </Stack.Navigator>
     </NavigationContainer>

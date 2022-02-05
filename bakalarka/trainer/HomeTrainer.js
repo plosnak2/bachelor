@@ -14,7 +14,7 @@ const HomeTrainer = ({ navigation }) => {
             
         })
         .then(() => {
-            navigation.navigate('Login')
+            navigation.replace('Login')
         
         })
         .catch(error => alert(error.message))
