@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import { UsersRef } from "../firebasecfg";
 
-// temporary home page
 const Home = ({ navigation }) => {
+    // tato komponenta služi pre rozlíšenie či sa prihlásil športovec alebo trener a určuje presmerovanie
     useEffect(async () => {
         const result = await AsyncStorage.getItem('email');
         const user = await UsersRef.doc(result).get();

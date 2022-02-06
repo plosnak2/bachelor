@@ -6,12 +6,13 @@ import { UsersRef } from "../firebasecfg";
 import NavbarTrainee from "./Navbar";
 
 
-// temporary home page
+// domovska obrazovka sportovca
 const HomeTrainee = ({ navigation }) => {
     const [coachName, setCoachName] = useState('');
     const [coachPhoto, setCoachPhoto] = useState('');
     const [loaded, setLoaded] = useState(false);
 
+    // ziskanie hlavnych informáci o trenerovi: mail a fotka
     useEffect(async () => {
         const result = await AsyncStorage.getItem('email');
         const user = await UsersRef.doc(result).get();
@@ -22,6 +23,7 @@ const HomeTrainee = ({ navigation }) => {
         setLoaded(true);
     }, [])
 
+    // dočasna funckia pre odhlásenie
     const handleSignOut= () =>{
       auth
         .signOut()
@@ -36,6 +38,7 @@ const HomeTrainee = ({ navigation }) => {
         .catch(error => alert(error.message))
     }
 
+    // pokial niesu ziskane informácie tak vraciam loader
     if(!loaded){
         return (
             <View style={[styles.container, styles.horizontal]}>

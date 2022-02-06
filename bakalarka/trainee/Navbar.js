@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-nati
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core'
 
+// navigačný panel pre športovca
 const NavbarTrainee = () => {
     const navigation = useNavigation()
     return (

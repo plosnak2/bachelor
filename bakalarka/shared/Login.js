@@ -7,8 +7,7 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // login screen is first to load when starting the application so in that case i need to check whether thr user is already logged in or not
-    // if he is logged in, he will be automatically redirected onto home page
+    // ako prva obrazovka ktora sa spusti je login screen -> potrebujem skontrolovat či je user aktualne prihlasený, ak ano tak ho autoamticky presmeruje
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
           if (user) {
@@ -22,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
         }
     }, [])
 
-    // function that handles login and storing user's mail into async storage
+    // funkcia sa stara o prihlasovanie uživatelov prípadne chýb pri zlej adrese/hesle
     const login = () => {
         auth
         .signInWithEmailAndPassword(email, password)
@@ -38,7 +37,6 @@ const LoginScreen = ({ navigation }) => {
         .catch(error => alert(error.message))
     }
 
-    // view for login screen
     return (
     <ImageBackground source={require('../assets/login.png')} resizeMode="cover" style={styles.imagebg} imageStyle={{ opacity: 0.8 }}>
         <View style={styles.container}>
