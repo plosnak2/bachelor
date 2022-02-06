@@ -1,8 +1,9 @@
-import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator } from "react-native";
+import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, ScrollView } from "react-native";
 import { auth } from '../firebase'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import { UsersRef } from "../firebasecfg";
+import NavbarTrainee from "./Navbar";
 
 
 // temporary home page
@@ -43,13 +44,18 @@ const HomeTrainee = ({ navigation }) => {
         )
     } else {
         return (
-            <View style={styles.container}>
-                <Text style={styles.name}>{coachName}</Text>
-                <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
-                <TouchableOpacity style={styles.wrapper}>
-                    <Text style={styles.wrapperedtext}>Otvoriť chat</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
+            <View style={{flex:1}}>
+                <ScrollView style={styles.container}>
+                    <View style={{alignItems:"center"}}>
+                        <Text style={styles.name}>{coachName}</Text>
+                        <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
+                        <TouchableOpacity style={styles.wrapper}>
+                            <Text style={styles.wrapperedtext}>Otvoriť chat</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
+                    </View>
+                </ScrollView>
+                <NavbarTrainee />
             </View>
         );
     }
@@ -60,7 +66,7 @@ export default HomeTrainee
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
+      backgroundColor: "white"
     },
 
     name:{
@@ -69,8 +75,8 @@ const styles = StyleSheet.create({
     },
 
     profilePhoto:{
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
         borderRadius: 100,
         marginTop: 20
     },
