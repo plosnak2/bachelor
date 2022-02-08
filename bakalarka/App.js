@@ -26,7 +26,13 @@ export default function App() {
           },
           headerTitleAlign: 'center',
         }}/>
-        <Stack.Screen name="HomeTrainer" component={HomeTrainer} />
+        <Stack.Screen name="HomeTrainer" component={HomeTrainer} options={{
+          title: 'Moji športovci',
+          headerStyle: {
+           backgroundColor: '#c4c4c4'
+         },
+         headerTitleAlign: 'center',
+       }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
