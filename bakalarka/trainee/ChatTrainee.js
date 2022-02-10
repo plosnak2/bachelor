@@ -31,7 +31,7 @@ const ChatTrainee = ({ navigation }) => {
         setCoachPhoto(coachPhoto)
         setMyPhoto(myPhoto) 
 
-        return subscribe
+        return () => subscribe();
     }, [])
 
     function sendMessage(){

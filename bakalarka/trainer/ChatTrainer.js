@@ -27,13 +27,11 @@ const ChatTrainer = ({ navigation }) => {
             setLoaded(true)
             
         })
-        
         setEmail(result)
         setTraineePhoto(traineePhoto)
         setMyPhoto(myPhoto)
-        
 
-        return subscribe
+        return () => subscribe();
     }, [])
 
     function sendMessage(){

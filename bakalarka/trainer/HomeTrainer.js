@@ -5,23 +5,31 @@ import React, { useEffect, useState } from 'react'
 import { UsersRef } from "../firebasecfg";
 import { Ionicons } from '@expo/vector-icons';
 import NavbarTrainer from "./Navbar";
+import { ChatRef } from "../firebasecfg";
 
 // temporary home page
 const HomeTrainer = ({ navigation }) => {
     const [traineePhoto, setTraineePhoto] = useState('');
     const [traineeName, setTraineeName] = useState('');
-    const [lastMessage, setLastMessage] = useState('Toto je len placeholder skuška pre poslednu spravu');
+    const [lastMessage, setLastMessage] = useState('');
 
-    useEffect(async () => {
-      const result = await AsyncStorage.getItem('email');
-      const user = await UsersRef.doc(result).get();
-      const traineeref = user.data().trainee;
-      const trainee = await UsersRef.doc(traineeref).get();
-      setTraineePhoto(trainee.data().profilephoto)
-      setTraineeName(trainee.data().name)
-      AsyncStorage.setItem('myPhoto', user.data().profilephoto)
-      AsyncStorage.setItem('traineePhoto', trainee.data().profilephoto)
-    }, [])
+    useEffect( () => {
+      const unsubscribe = navigation.addListener('focus', async () => {
+        const result = await AsyncStorage.getItem('email');
+        const user = await UsersRef.doc(result).get();
+        const traineeref = user.data().trainee;
+        const trainee = await UsersRef.doc(traineeref).get();
+        const query = await ChatRef.orderBy("date", "desc").limit(1).get();
+        setLastMessage(query.docs[0].data().message)
+        setTraineePhoto(trainee.data().profilephoto)
+        setTraineeName(trainee.data().name)
+        AsyncStorage.setItem('myPhoto', user.data().profilephoto)
+        AsyncStorage.setItem('traineePhoto', trainee.data().profilephoto)
+      });
+
+      return unsubscribe;
+      
+    }, [navigation])
 
     const handleSignOut= () =>{
       auth
