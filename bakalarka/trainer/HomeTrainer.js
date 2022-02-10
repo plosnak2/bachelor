@@ -19,6 +19,8 @@ const HomeTrainer = ({ navigation }) => {
       const trainee = await UsersRef.doc(traineeref).get();
       setTraineePhoto(trainee.data().profilephoto)
       setTraineeName(trainee.data().name)
+      AsyncStorage.setItem('myPhoto', user.data().profilephoto)
+      AsyncStorage.setItem('traineePhoto', trainee.data().profilephoto)
     }, [])
 
     const handleSignOut= () =>{
@@ -38,7 +40,7 @@ const HomeTrainer = ({ navigation }) => {
       return(
         <View style={{flex:1}}>
           <ScrollView  style={styles.container}>
-            <TouchableOpacity style={{alignItems:"center"}}>
+            <TouchableOpacity style={{alignItems:"center"}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName})}>
               <View style={styles.column}>
                 <View style={{flexDirection:"column", alignItems:"center", width: "40%", marginTop: 10}}>
                   <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
@@ -56,6 +58,7 @@ const HomeTrainer = ({ navigation }) => {
                 </View>
               </View>
             </TouchableOpacity>
+            <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
           </ScrollView>
           <NavbarTrainer />
         </View>
