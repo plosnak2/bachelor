@@ -55,7 +55,7 @@ const ChatTrainer = ({ navigation }) => {
     }
     return (
         <KeyboardAvoidingView  style={{flex:1, position:"relative"}}>
-            <ScrollView style={{height:1000, marginBottom:60}} ref={scrollViewRef} onContentSizeChange={() => {
+            <ScrollView style={{height:1000, marginBottom:20}} ref={scrollViewRef} onContentSizeChange={() => {
                 if(scrollViewRef !== null){scrollViewRef.current.scrollToEnd({ animated: true })}
             }}>
                 
@@ -92,6 +92,14 @@ const ChatTrainer = ({ navigation }) => {
                     )
                 }
             </ScrollView>
+            <View style={styles.panel}>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{}}>Moje správy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button2}>
+                    <Text style={{}}>Poslať fotku</Text>
+                </TouchableOpacity>
+            </View>
             <TextInput style={styles.input} placeholder="Napíšte správu" onSubmitEditing={sendMessage} onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})} onChangeText={newText => setMessage(newText)} value={message}/>
         </KeyboardAvoidingView>
     );
@@ -100,6 +108,36 @@ const ChatTrainer = ({ navigation }) => {
 export default ChatTrainer
 
 const styles = StyleSheet.create({
+    button2:{
+        width:"30%",
+        backgroundColor:"white",
+        height:30,
+        marginLeft: "10%",
+        borderRadius:100,
+        alignItems:"center",
+        justifyContent:"center"
+    },
+
+    button:{
+        width:"30%",
+        backgroundColor:"white",
+        height:30,
+        marginLeft: "15%",
+        borderRadius:100,
+        alignItems:"center",
+        justifyContent:"center"
+    },
+
+    panel:{
+        width:"100%",
+        height:40,
+        backgroundColor:"#c4c4c4",
+        borderTopWidth:1,
+        flexDirection:"row",
+        marginBottom:50,
+        alignItems:"center"
+    },
+
     profilePhoto:{
         width: 45,
         height: 45,
