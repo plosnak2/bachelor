@@ -93,7 +93,7 @@ const ChatTrainer = ({ navigation }) => {
                 }
             </ScrollView>
             <View style={styles.panel}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PredefinedTrainer')}>
                     <Text style={{}}>Moje správy</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button2}>

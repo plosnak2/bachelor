@@ -9,14 +9,14 @@ const NavbarTrainer = () => {
     return (
         <View>
         <View style={styles.navbar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('HomeTrainer')}>
             <View style={styles.item1}>
                 <Ionicons name="chatbox-ellipses-outline" size={40} color="black" />
                 <Text style={styles.text}>Chat</Text>
             </View>
             </TouchableOpacity>
             
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('PredefinedTrainer')}>
             <View style={styles.item2}>
                 <Ionicons name="chatbubble-outline" size={40} color="black" />
                 <Text style={styles.text}>Moje správy</Text>

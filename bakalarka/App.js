@@ -8,6 +8,9 @@ import HomeTrainer from './trainer/HomeTrainer';
 import { LogBox } from 'react-native';
 import ChatTrainee from './trainee/ChatTrainee';
 import ChatTrainer from './trainer/ChatTrainer';
+import { Ionicons } from '@expo/vector-icons';
+import {View} from "react-native";
+import PredefinedTrainer from './trainer/PredefinedTrainer';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -41,6 +44,11 @@ export default function App() {
           backgroundColor: '#c4c4c4'
         },
         headerTitleAlign: 'center',
+        headerRight: () => 
+        <View style={{flexDirection: 'row', paddingRight:0}}>
+           <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}}/>
+           <Ionicons name='images-outline' size={35} style={{marginLeft: 15}}/>
+        </View>
         })}/>
         <Stack.Screen name="ChatTrainer" component={ChatTrainer} options={({ route }) => ({ 
           title: route.params.name,
@@ -48,7 +56,19 @@ export default function App() {
            backgroundColor: '#c4c4c4'
          },
          headerTitleAlign: 'center',
+         headerRight: () => 
+         <View style={{flexDirection: 'row', paddingRight:0}}>
+            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}}/>
+            <Ionicons name='images-outline' size={35} style={{marginLeft: 15}}/>
+         </View>
          })}/>
+         <Stack.Screen name="PredefinedTrainer" component={PredefinedTrainer} options={{
+          title: 'Preddefinované správy',
+          headerStyle: {
+           backgroundColor: '#c4c4c4'
+         },
+         headerTitleAlign: 'center',
+       }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
