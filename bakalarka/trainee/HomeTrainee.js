@@ -21,6 +21,8 @@ const HomeTrainee = ({ navigation }) => {
         setCoachName(coach.data().name)
         setCoachPhoto(coach.data().profilephoto)
         setLoaded(true);
+        AsyncStorage.setItem('coachPhoto', coach.data().profilephoto)
+        AsyncStorage.setItem('myPhoto', user.data().profilephoto)
     }, [])
 
     // dočasna funckia pre odhlásenie
@@ -52,7 +54,7 @@ const HomeTrainee = ({ navigation }) => {
                     <View style={{alignItems:"center"}}>
                         <Text style={styles.name}>{coachName}</Text>
                         <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
-                        <TouchableOpacity style={styles.wrapper}>
+                        <TouchableOpacity style={styles.wrapper} onPress={() => navigation.navigate('ChatTrainee',{name: coachName})}>
                             <Text style={styles.wrapperedtext}>Otvoriť chat</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>

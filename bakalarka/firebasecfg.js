@@ -27,6 +27,6 @@ const db = firebase.firestore(app);
 const storage = firebase.storage(app)
 
 export const UsersRef = db.collection("users");
-
+export const ChatRef = db.collection("messages");
 
 export {firebase, storage};

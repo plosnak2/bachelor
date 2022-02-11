@@ -6,6 +6,8 @@ import Home from './shared/Home';
 import HomeTrainee from './trainee/HomeTrainee';
 import HomeTrainer from './trainer/HomeTrainer';
 import { LogBox } from 'react-native';
+import ChatTrainee from './trainee/ChatTrainee';
+import ChatTrainer from './trainer/ChatTrainer';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -33,6 +35,20 @@ export default function App() {
          },
          headerTitleAlign: 'center',
        }}/>
+       <Stack.Screen name="ChatTrainee" component={ChatTrainee} options={({ route }) => ({ 
+         title: route.params.name,
+         headerStyle: {
+          backgroundColor: '#c4c4c4'
+        },
+        headerTitleAlign: 'center',
+        })}/>
+        <Stack.Screen name="ChatTrainer" component={ChatTrainer} options={({ route }) => ({ 
+          title: route.params.name,
+          headerStyle: {
+           backgroundColor: '#c4c4c4'
+         },
+         headerTitleAlign: 'center',
+         })}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
