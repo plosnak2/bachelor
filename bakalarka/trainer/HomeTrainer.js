@@ -25,6 +25,7 @@ const HomeTrainer = ({ navigation }) => {
         setTraineeName(trainee.data().name)
         AsyncStorage.setItem('myPhoto', user.data().profilephoto)
         AsyncStorage.setItem('traineePhoto', trainee.data().profilephoto)
+        AsyncStorage.setItem('traineeName', trainee.data().name)
       });
 
       return unsubscribe;

@@ -1,8 +1,11 @@
-import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, TextInput, Keyboard } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import NavbarTrainer from "./Navbar";
 import {PredefinedRef} from "../firebasecfg"
+import firebase from "firebase";
+import "firebase/firestore";
+import { ChatRef } from "../firebasecfg";
 
 
 // temporary home page
@@ -10,8 +13,14 @@ const PredefinedTrainer = ({ navigation }) => {
   const [predefinedMessages, setPredefinedMessages] = useState([])
   const [ids,setIds] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendingMessage, setSendingMessage] = useState('')
+  const [id, setId] = useState('')
+  const [email, setEmail] = useState('')
+  const [traineeName, setTraineeName] = useState('')
 
   useEffect( () => {
+    
     const unsubscribe = navigation.addListener('focus', async () => {
       PredefinedRef.orderBy("usage", "desc").get().then((querySnapshot) => {
           let messages = [];
@@ -23,13 +32,40 @@ const PredefinedTrainer = ({ navigation }) => {
           setPredefinedMessages(messages)
           setIds(ids)
           setLoaded(true)
+          
       });
-      
+      const result = await AsyncStorage.getItem('email');
+      const result2 = await AsyncStorage.getItem('traineeName');
+      setEmail(result)
+      setTraineeName(result2)
     });
 
     return unsubscribe;
     
   }, [navigation])
+
+  function sendingMode(message, id){
+    setSending(true)
+    setSendingMessage(message.message)
+    setId(id)
+  }
+
+  function sendMessage(){
+    PredefinedRef.doc(id).update({
+      usage: firebase.firestore.FieldValue.increment(1)
+    })
+    .then(()=>{
+      ChatRef.add({
+        date: new Date(),
+        from: email,
+        isPhoto: false,
+        message: sendingMessage
+      })
+    })
+    .then(() => {
+      navigation.navigate('ChatTrainer',{name: traineeName})
+    })
+  }
 
 
   if(!loaded){
@@ -40,6 +76,26 @@ const PredefinedTrainer = ({ navigation }) => {
             </View>
             <NavbarTrainer />
         </View>
+    )
+  }
+
+  if(sending){
+    return(
+      <View style={{flex:1}}>
+        <TouchableOpacity style={{flex:1, backgroundColor:"white"}} onPress={() => Keyboard.dismiss()}>
+          <View style={{alignItems:"center", marginTop:20}}>
+            <Text style={{fontWeight:"bold", fontSize:20}}>Upraviť správu pred odoslaním:</Text>
+            <TextInput onChangeText={newText => setSendingMessage(newText)} value={sendingMessage} multiline style={styles.input}/>
+            <TouchableOpacity style={styles.button2} onPress={() => sendMessage()}>
+              <Text style={{fontSize:20, fontWeight:"500"}}>Odoslať</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={() => setSending(false)}>
+              <Text style={{fontSize:20, fontWeight:"500"}}>Naspäť</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+        
+      </View>
     )
   }
 
@@ -54,7 +110,7 @@ const PredefinedTrainer = ({ navigation }) => {
                 <Text style={styles.message} numberOfLines={2}>{message.message}</Text>
                 <View style={styles.bottom}>
                   <Text style={styles.usage}>Počet použití: {message.usage}</Text>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity style={styles.button} onPress={() => sendingMode(message, ids[index])}>
                     <Text>Poslať</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button}>
@@ -74,6 +130,21 @@ const PredefinedTrainer = ({ navigation }) => {
 export default PredefinedTrainer
 
 const styles = StyleSheet.create({
+    button2:{
+      width:"80%",
+      backgroundColor:"#c4c4c4",
+      height:50,
+      marginTop:30,
+      borderRadius:50,
+      justifyContent:"center",
+      alignItems:"center"
+    },  
+    input:{
+      width:"80%",
+      borderWidth:1,
+      padding:10,
+      marginTop:10
+    },
     button:{
       width:"20%",
       backgroundColor:"#c4c4c4",
