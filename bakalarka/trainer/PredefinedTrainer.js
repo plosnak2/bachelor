@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: "white",
+        marginBottom:80
     },
     container2: {
       flex: 1,
