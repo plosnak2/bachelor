@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, TextInput, Keyboard } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, TextInput, Keyboard, Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import NavbarTrainer from "./Navbar";
@@ -6,6 +6,7 @@ import {PredefinedRef} from "../firebasecfg"
 import firebase from "firebase";
 import "firebase/firestore";
 import { ChatRef } from "../firebasecfg";
+import { Ionicons } from '@expo/vector-icons';
 
 
 // temporary home page
@@ -99,6 +100,40 @@ const PredefinedTrainer = ({ navigation }) => {
     })
   }
 
+  const deleteMessage = (id) => {
+    return Alert.alert(
+      "Vymazať správu",
+      "Naozaj si prajete vymazať túto preddefinovanú správu?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            PredefinedRef.doc(id).delete()
+            .then(() => {
+              PredefinedRef.orderBy("usage", "desc").get().then((querySnapshot) => {
+                let messages = [];
+                let ids = [];
+                querySnapshot.forEach((doc) => {
+                  messages.push(doc.data())
+                  ids.push(doc.id)
+                });
+                setPredefinedMessages(messages)
+                setIds(ids)
+              });
+            })
+          }
+          
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
 
   if(!loaded){
     return( 
@@ -160,7 +195,12 @@ const PredefinedTrainer = ({ navigation }) => {
           predefinedMessages.map((message, index) => {
             return(
               <View style={styles.box}>
-                <Text style={styles.header}>{message.name}</Text>
+                <View style={{flexDirection:"column", alignItems:"center", width:"100%",marginBottom:10}}>
+                  <Text style={styles.header}>{message.name}</Text>
+                  <TouchableOpacity style={styles.icon} onPress={() => deleteMessage(ids[index])}> 
+                    <Ionicons name="trash-outline" size={40} color="black"/>
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.message} numberOfLines={2}>{message.message}</Text>
                 <View style={styles.bottom}>
                   <Text style={styles.usage}>Počet použití: {message.usage}</Text>
@@ -184,6 +224,11 @@ const PredefinedTrainer = ({ navigation }) => {
 export default PredefinedTrainer
 
 const styles = StyleSheet.create({
+    icon:{
+        position: "absolute",
+        top:-5,
+        right:0
+    },
     button2:{
       width:"80%",
       backgroundColor:"#c4c4c4",
@@ -226,7 +271,7 @@ const styles = StyleSheet.create({
     },
     box:{
       width:"100%",
-      height:150,
+      height:170,
       borderTopWidth:1,
       borderBottomWidth:1,
       marginTop:15,
