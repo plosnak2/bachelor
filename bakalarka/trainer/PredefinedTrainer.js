@@ -18,6 +18,9 @@ const PredefinedTrainer = ({ navigation }) => {
   const [id, setId] = useState('')
   const [email, setEmail] = useState('')
   const [traineeName, setTraineeName] = useState('')
+  const [editing, setEditing] = useState(false)
+  const [editingHeader, setEditingHeader] = useState('')
+  const [editingMessage, setEditingMessage] = useState('')
 
   useEffect( () => {
     
@@ -42,11 +45,18 @@ const PredefinedTrainer = ({ navigation }) => {
 
     return unsubscribe;
     
-  }, [navigation])
+  }, [navigation, editing])
 
   function sendingMode(message, id){
     setSending(true)
     setSendingMessage(message.message)
+    setId(id)
+  }
+
+  function editingMode(message, id){
+    setEditing(true)
+    setEditingMessage(message.message)
+    setEditingHeader(message.name)
     setId(id)
   }
 
@@ -64,6 +74,28 @@ const PredefinedTrainer = ({ navigation }) => {
     })
     .then(() => {
       navigation.navigate('ChatTrainer',{name: traineeName})
+    })
+  }
+
+  function editMessage(){
+    PredefinedRef.doc(id).update({
+      message: editingMessage,
+      name: editingHeader
+    })
+    .then(() => {
+      PredefinedRef.orderBy("usage", "desc").get().then((querySnapshot) => {
+        let messages = [];
+        let ids = [];
+        querySnapshot.forEach((doc) => {
+          messages.push(doc.data())
+          ids.push(doc.id)
+        });
+        setPredefinedMessages(messages)
+        setIds(ids)
+    });
+    })
+    .then(() => {
+      setEditing(false)
     })
   }
 
@@ -99,8 +131,30 @@ const PredefinedTrainer = ({ navigation }) => {
     )
   }
 
+  if(editing){
+    return(
+      <View style={{flex:1}}>
+        <TouchableOpacity style={{flex:1, backgroundColor:"white"}} onPress={() => Keyboard.dismiss()}>
+          <View style={{alignItems:"center", marginTop:20}}>
+            <Text style={{fontWeight:"bold", fontSize:20}}>Upraviť názov:</Text>
+            <TextInput onChangeText={newText => setEditingHeader(newText)} value={editingHeader} multiline style={styles.input}/>
+            <Text style={{fontWeight:"bold", fontSize:20}}>Upraviť správu:</Text>
+            <TextInput onChangeText={newText => setEditingMessage(newText)} value={editingMessage} multiline style={styles.input}/>
+            <TouchableOpacity style={styles.button2} onPress={() => editMessage()}>
+              <Text style={{fontSize:20, fontWeight:"500"}}>Uložiť</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={() => setEditing(false)}>
+              <Text style={{fontSize:20, fontWeight:"500"}}>Naspäť</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+        
+      </View>
+    )
+  }
+
   return(
-    <View style={{flex:1}}>
+    <View style={{flex:1, backgroundColor:"white"}}>
         <ScrollView  style={styles.container}>
         {
           predefinedMessages.map((message, index) => {
@@ -113,7 +167,7 @@ const PredefinedTrainer = ({ navigation }) => {
                   <TouchableOpacity style={styles.button} onPress={() => sendingMode(message, ids[index])}>
                     <Text>Poslať</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity style={styles.button} onPress={() => editingMode(message, ids[index])}>
                     <Text>Upraviť</Text>
                   </TouchableOpacity>
                 </View>
@@ -178,12 +232,13 @@ const styles = StyleSheet.create({
       marginTop:15,
       flexDirection:"column",
       alignItems:"center",
-      padding:8
+      padding:8,
+      marginBottom:5
     },
     container: {
         flex: 1,
         backgroundColor: "white",
-        marginBottom:80
+        marginBottom:70,
     },
     container2: {
       flex: 1,
