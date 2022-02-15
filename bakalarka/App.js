@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {View} from "react-native";
 import PredefinedTrainer from './trainer/PredefinedTrainer';
 import AddPredefined from './trainer/AddPredefined';
+import SendPhoto from './trainee/SendPhoto';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -81,6 +82,13 @@ export default function App() {
          },
          headerTitleAlign: 'center',
         }}/>
+        <Stack.Screen name="SendPhoto" component={SendPhoto} options={{
+          title: 'Odoslať fotku',
+          headerStyle: {
+           backgroundColor: '#c4c4c4'
+         },
+         headerTitleAlign: 'center',
+       }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

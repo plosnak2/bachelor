@@ -4,6 +4,7 @@ import { ChatRef } from "../firebasecfg";
 import { UsersRef } from "../firebasecfg";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Moment from 'moment';
+import * as ImagePicker from 'expo-image-picker';
 
 const ChatTrainee = ({ navigation }) => {
     const [messages, setMessages] = useState([])
@@ -34,6 +35,22 @@ const ChatTrainee = ({ navigation }) => {
         return () => subscribe();
     }, [])
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: false,
+          aspect: [1, 1],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            navigation.navigate('SendPhoto', {imageUri: result.uri})
+        }
+    };
+
     function sendMessage(){
        ChatRef.add({
             date: new Date(),
@@ -56,7 +73,7 @@ const ChatTrainee = ({ navigation }) => {
     }
     return (
         <KeyboardAvoidingView  style={{flex:1, position:"relative"}}>
-            <ScrollView style={{height:1000, marginBottom:60}} ref={scrollViewRef} onContentSizeChange={() => {
+            <ScrollView style={{height:1000}} ref={scrollViewRef} onContentSizeChange={() => {
                 if(scrollViewRef !== null){scrollViewRef.current.scrollToEnd({ animated: true })}
             }}>
                 
@@ -93,6 +110,14 @@ const ChatTrainee = ({ navigation }) => {
                     )
                 }
             </ScrollView>
+            <View style={styles.panel}>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{}}>Moje správy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button2} onPress={pickImage}>
+                    <Text style={{}}>Poslať fotku</Text>
+                </TouchableOpacity>
+            </View>
             <TextInput style={styles.input} placeholder="Napíšte správu" onSubmitEditing={sendMessage} onChangeText={newText => setMessage(newText)} value={message} onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})}/>
         </KeyboardAvoidingView>
     );
@@ -101,6 +126,35 @@ const ChatTrainee = ({ navigation }) => {
 export default ChatTrainee
 
 const styles = StyleSheet.create({
+    button2:{
+        width:"30%",
+        backgroundColor:"white",
+        height:30,
+        marginLeft: "10%",
+        borderRadius:100,
+        alignItems:"center",
+        justifyContent:"center"
+    },
+
+    button:{
+        width:"30%",
+        backgroundColor:"white",
+        height:30,
+        marginLeft: "15%",
+        borderRadius:100,
+        alignItems:"center",
+        justifyContent:"center"
+    },
+
+    panel:{
+        width:"100%",
+        height:40,
+        backgroundColor:"#c4c4c4",
+        borderTopWidth:1,
+        flexDirection:"row",
+        marginBottom:50,
+        alignItems:"center"
+    },
     profilePhoto:{
         width: 45,
         height: 45,
