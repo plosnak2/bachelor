@@ -71,7 +71,7 @@ export default function App() {
          headerTitleAlign: 'center',
          headerRight: () => 
          <View style={{flexDirection: 'row', paddingRight:0}}>
-            <Ionicons name='add' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('AddPredefined')}/>
+            <Ionicons name='add' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('AddPredefined', {message: ''})}/>
          </View>
         })}/>
         <Stack.Screen name="AddPredefined" component={AddPredefined} options={{

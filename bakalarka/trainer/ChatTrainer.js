@@ -4,6 +4,7 @@ import { ChatRef } from "../firebasecfg";
 import { UsersRef } from "../firebasecfg";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Moment from 'moment';
+import { Ionicons } from '@expo/vector-icons';
 
 const ChatTrainer = ({ navigation }) => {
     const [messages, setMessages] = useState([])
@@ -70,6 +71,9 @@ const ChatTrainer = ({ navigation }) => {
                                         <View style={styles.trainee}>
                                             <Text>{message.message}</Text>
                                         </View>
+                                        <TouchableOpacity onPress={() => navigation.navigate('AddPredefined', {message: message.message})}>
+                                            <Ionicons name='pin' size={35}/>
+                                        </TouchableOpacity>
                                     </View>
                                     <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
                                 </View>

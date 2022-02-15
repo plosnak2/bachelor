@@ -1,22 +1,26 @@
-import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, TextInput, Keyboard, KeyboardAvoidingView } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, TextInput, Keyboard, KeyboardAvoidingView, Alert } from "react-native";
 import React, { useEffect, useState } from 'react'
 import NavbarTrainer from "./Navbar";
 import { PredefinedRef } from "../firebasecfg";
 
 
-const AddPredefined = ({ navigation }) => {
+const AddPredefined = ({ navigation, route }) => {
     const [name, setName] = useState('')
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState(route.params.message)
 
     function saveMessage(){
-        PredefinedRef.add({
-            message: message,
-            name: name,
-            usage: 0
-        })
-        .then((docRef) => {
-            navigation.navigate('PredefinedTrainer')
-        })
+        if(name === '' || message === ''){
+            Alert.alert("Chyba", "Musia byť vyplnené obe políčka")
+        } else {
+            PredefinedRef.add({
+                message: message,
+                name: name,
+                usage: 0
+            })
+            .then((docRef) => {
+                navigation.navigate('PredefinedTrainer')
+            })
+        }
     }
 
     return(
