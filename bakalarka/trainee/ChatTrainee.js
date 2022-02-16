@@ -13,12 +13,14 @@ const ChatTrainee = ({ navigation }) => {
     const [message, setMessage] = useState('')
     const [coachPhoto, setCoachPhoto] = useState('');
     const [myPhoto, setMyPhoto] = useState('');
+    const [coachName, setCoachName] = useState('')
     const scrollViewRef = useRef();
 
     useEffect(async () => {
         const result = await AsyncStorage.getItem('email');
         const coachPhoto = await AsyncStorage.getItem('coachPhoto');
         const myPhoto = await AsyncStorage.getItem('myPhoto');
+        const coachName = await AsyncStorage.getItem('coachName');
         const subscribe = ChatRef.orderBy("date", "asc").onSnapshot((QuerySnapshot) => {
             let messagesActual = [];
             QuerySnapshot.forEach((doc) => {
@@ -31,7 +33,7 @@ const ChatTrainee = ({ navigation }) => {
         setEmail(result)
         setCoachPhoto(coachPhoto)
         setMyPhoto(myPhoto) 
-
+        setCoachName(coachName)
         return () => subscribe();
     }, [])
 
@@ -47,7 +49,7 @@ const ChatTrainee = ({ navigation }) => {
         console.log(result);
     
         if (!result.cancelled) {
-            navigation.navigate('SendPhoto', {imageUri: result.uri})
+            navigation.navigate('SendPhoto', {imageUri: result.uri, coachName: coachName})
         }
     };
 

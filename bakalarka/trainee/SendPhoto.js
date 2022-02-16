@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SendPhoto = ({ navigation, route }) => {
     const [imageUri, setImageUri] = useState(route.params.imageUri)
     const [name, setName] = useState('')
+    const [coachName, setCoachName] = useState(route.params.coachName)
 
     // https://stackoverflow.com/questions/60753537/how-to-upload-image-to-firebase-in-expo-react-native
     const getPictureBlob = (uri) => {
@@ -64,8 +65,7 @@ const SendPhoto = ({ navigation, route }) => {
                 alert("Please Select a Photo First");
             } finally {
                 blob.close();
-                alert("saved successfully");
-                
+                navigation.navigate('ChatTrainee',{name: coachName})
             }
         }
     };
