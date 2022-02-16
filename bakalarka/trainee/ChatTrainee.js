@@ -81,39 +81,63 @@ const ChatTrainee = ({ navigation }) => {
                     messages.map(message => {
                         // sportovec
                         if(message.from === email){
-                            return(
-                                <View style={{flexDirection:"column"}}>
-                                    <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
-                                        <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
-                                        <View style={styles.trainee}>
-                                            <Text>{message.message}</Text>
+                            if(message.isPhoto === true){
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.traineePhoto}>
+                                                <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                            </View>
                                         </View>
+                                        <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
                                     </View>
-                                    <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
-                                </View>
-                            )
+                                )
+                            } else {
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.trainee}>
+                                                <Text>{message.message}</Text>
+                                            </View>
+                                        </View>
+                                        <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                    </View>
+                                )
+                            }
                         } else {
                             // trener
-                            return(
+                            if(message.isPhoto === true){
                                 <View style={{flexDirection:"column"}}>
                                     <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
                                         <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
-                                        <View style={styles.trainer}>
-                                            <Text>{message.message}</Text>
+                                        <View style={styles.trainerPhoto}>
+                                            <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                         </View>
                                     </View>
                                     <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
                                 </View>
-                            )
+                            } else {
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.trainer}>
+                                                <Text>{message.message}</Text>
+                                            </View>
+                                        </View>
+                                        <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                    </View>
+                                )
+                            }
                         }
                     }
                     )
                 }
             </ScrollView>
             <View style={styles.panel}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={{}}>Moje správy</Text>
-                </TouchableOpacity>
+                
                 <TouchableOpacity style={styles.button2} onPress={pickImage}>
                     <Text style={{}}>Poslať fotku</Text>
                 </TouchableOpacity>
@@ -130,13 +154,13 @@ const styles = StyleSheet.create({
         width:"30%",
         backgroundColor:"white",
         height:30,
-        marginLeft: "10%",
+        marginLeft: "35%",
         borderRadius:100,
         alignItems:"center",
         justifyContent:"center"
     },
 
-    button:{
+    /*button:{
         width:"30%",
         backgroundColor:"white",
         height:30,
@@ -144,7 +168,7 @@ const styles = StyleSheet.create({
         borderRadius:100,
         alignItems:"center",
         justifyContent:"center"
-    },
+    },*/
 
     panel:{
         width:"100%",
@@ -162,12 +186,32 @@ const styles = StyleSheet.create({
         marginTop:10
     },
 
+    traineePhoto:{
+        maxWidth:"60%",
+        backgroundColor:"lightblue",
+        padding:10,
+        alignSelf : 'flex-end',
+        marginRight:5,
+        borderRadius:20,
+        marginTop:10
+    },
+
     trainee:{
         maxWidth:"60%",
         backgroundColor:"lightblue",
         padding:15,
         alignSelf : 'flex-end',
         marginRight:5,
+        borderRadius:20,
+        marginTop:10
+    },
+
+    trainerPhoto:{
+        maxWidth:"60%",
+        backgroundColor:"lightblue",
+        padding:10,
+        alignSelf : 'flex-start',
+        marginLeft:5,
         borderRadius:20,
         marginTop:10
     },

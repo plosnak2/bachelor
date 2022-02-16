@@ -64,6 +64,19 @@ const ChatTrainer = ({ navigation }) => {
                     messages.map(message => {
                         // trener
                         if(message.from === email){
+                            if(message.isPhoto === true){
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.traineePhoto}>
+                                                <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                            </View>
+                                        </View>
+                                        <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                    </View>
+                                )
+                            }
                             return(
                                 <View style={{flexDirection:"column"}}>
                                     <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
@@ -79,18 +92,31 @@ const ChatTrainer = ({ navigation }) => {
                                 </View>
                             )
                         } else {
-                            // sportovec
-                            return(
-                                <View style={{flexDirection:"column"}}>
-                                    <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
-                                        <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
-                                        <View style={styles.trainer}>
-                                            <Text>{message.message}</Text>
+                            if(message.isPhoto === true){
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.trainerPhoto}>
+                                                <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                            </View>
                                         </View>
+                                        <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
                                     </View>
-                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
-                                </View>
-                            )
+                                )
+                            } else {
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.trainer}>
+                                                <Text>{message.message}</Text>
+                                            </View>
+                                        </View>
+                                        <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                    </View>
+                                )
+                            } 
                         }
                     }
                     )
@@ -100,9 +126,7 @@ const ChatTrainer = ({ navigation }) => {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PredefinedTrainer')}>
                     <Text style={{}}>Moje správy</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button2}>
-                    <Text style={{}}>Poslať fotku</Text>
-                </TouchableOpacity>
+                
             </View>
             <TextInput style={styles.input} placeholder="Napíšte správu" onSubmitEditing={sendMessage} onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})} onChangeText={newText => setMessage(newText)} value={message}/>
         </KeyboardAvoidingView>
@@ -112,7 +136,7 @@ const ChatTrainer = ({ navigation }) => {
 export default ChatTrainer
 
 const styles = StyleSheet.create({
-    button2:{
+    /*button2:{
         width:"30%",
         backgroundColor:"white",
         height:30,
@@ -120,13 +144,13 @@ const styles = StyleSheet.create({
         borderRadius:100,
         alignItems:"center",
         justifyContent:"center"
-    },
+    },*/
 
     button:{
         width:"30%",
         backgroundColor:"white",
         height:30,
-        marginLeft: "15%",
+        marginLeft: "35%",
         borderRadius:100,
         alignItems:"center",
         justifyContent:"center"
@@ -149,12 +173,32 @@ const styles = StyleSheet.create({
         marginTop:10
     },
 
+    traineePhoto:{
+        maxWidth:"60%",
+        backgroundColor:"lightblue",
+        padding:10,
+        alignSelf : 'flex-end',
+        marginRight:5,
+        borderRadius:20,
+        marginTop:10
+    },
+
     trainee:{
         maxWidth:"60%",
         backgroundColor:"lightblue",
         padding:15,
         alignSelf : 'flex-end',
         marginRight:5,
+        borderRadius:20,
+        marginTop:10
+    },
+
+    trainerPhoto:{
+        maxWidth:"60%",
+        backgroundColor:"lightblue",
+        padding:10,
+        alignSelf : 'flex-start',
+        marginLeft:5,
         borderRadius:20,
         marginTop:10
     },
