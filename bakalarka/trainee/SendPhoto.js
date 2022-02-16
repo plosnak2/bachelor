@@ -5,12 +5,13 @@ import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
 import { PhotosRef } from "../firebasecfg";
 import { ChatRef } from "../firebasecfg";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { OverlaySpinner } from "../shared/OverlaySpinner";
 
 const SendPhoto = ({ navigation, route }) => {
     const [imageUri, setImageUri] = useState(route.params.imageUri)
     const [name, setName] = useState('')
     const [coachName, setCoachName] = useState(route.params.coachName)
+    const [showSpinner, setShowSpinner] = useState(false);
 
     // https://stackoverflow.com/questions/60753537/how-to-upload-image-to-firebase-in-expo-react-native
     const getPictureBlob = (uri) => {
@@ -30,6 +31,7 @@ const SendPhoto = ({ navigation, route }) => {
 
     // https://stackoverflow.com/questions/60753537/how-to-upload-image-to-firebase-in-expo-react-native
     const uploadImageToBucket = async () => {
+        setShowSpinner(true)
         if(name === ''){
             Alert.alert("Chyba", "Zadajte meno cviku")
         } else {
@@ -62,7 +64,8 @@ const SendPhoto = ({ navigation, route }) => {
                     message: imageUrl
                 })
             } catch (e) {
-                alert("Please Select a Photo First");
+                alert("Nepodarilo sa odoslať fotku");
+                setShowSpinner(false)
             } finally {
                 blob.close();
                 navigation.navigate('ChatTrainee',{name: coachName})
@@ -72,6 +75,7 @@ const SendPhoto = ({ navigation, route }) => {
 
     return(
     <ScrollView style={{flex:1}}>
+        {showSpinner && <OverlaySpinner />}
         <View style={styles.image}>
             {imageUri && <Image source={{ uri: imageUri }} style={{ width: "100%", height: "100%", resizeMode:"contain" }} />}
         </View>
