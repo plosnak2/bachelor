@@ -127,7 +127,7 @@ const ChatTrainer = ({ navigation, route }) => {
             </ScrollView>
             <View style={styles.panel}>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PredefinedTrainer')}>
-                    <Text style={{}}>Moje správy</Text>
+                    <Text style={{}}>Uložené odpovede</Text>
                 </TouchableOpacity>
                 
             </View>
@@ -150,10 +150,10 @@ const styles = StyleSheet.create({
     },*/
 
     button:{
-        width:"30%",
+        width:"40%",
         backgroundColor:"white",
         height:30,
-        marginLeft: "35%",
+        marginLeft: "30%",
         borderRadius:100,
         alignItems:"center",
         justifyContent:"center"

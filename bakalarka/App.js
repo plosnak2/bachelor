@@ -76,7 +76,7 @@ export default function App() {
          </View>
         })}/>
         <Stack.Screen name="AddPredefined" component={AddPredefined} options={{
-          title: 'Vytvoriť novú správu',
+          title: 'Uložiť novú rýchlu odpoveď',
           headerStyle: {
            backgroundColor: '#c4c4c4'
          },
