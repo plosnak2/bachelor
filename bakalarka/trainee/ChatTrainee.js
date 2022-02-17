@@ -185,7 +185,8 @@ const styles = StyleSheet.create({
         width: 45,
         height: 45,
         borderRadius: 100,
-        marginTop:10
+        marginTop:10,
+        alignSelf:"flex-start"
     },
 
     traineePhoto:{
