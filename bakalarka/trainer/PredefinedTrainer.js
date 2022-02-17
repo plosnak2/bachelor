@@ -49,9 +49,12 @@ const PredefinedTrainer = ({ navigation }) => {
   }, [navigation, editing])
 
   function sendingMode(message, id){
-    setSending(true)
-    setSendingMessage(message.message)
-    setId(id)
+    PredefinedRef.doc(id).update({
+      usage: firebase.firestore.FieldValue.increment(1)
+    })
+    .then(()=>{
+      navigation.navigate('ChatTrainer',{name: traineeName, message: message.message})
+    })
   }
 
   function editingMode(message, id){
@@ -66,15 +69,7 @@ const PredefinedTrainer = ({ navigation }) => {
       usage: firebase.firestore.FieldValue.increment(1)
     })
     .then(()=>{
-      ChatRef.add({
-        date: new Date(),
-        from: email,
-        isPhoto: false,
-        message: sendingMessage
-      })
-    })
-    .then(() => {
-      navigation.navigate('ChatTrainer',{name: traineeName})
+      navigation.navigate('ChatTrainer',{name: traineeName, message: sendingMessage})
     })
   }
 

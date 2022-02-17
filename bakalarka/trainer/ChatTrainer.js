@@ -6,16 +6,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Moment from 'moment';
 import { Ionicons } from '@expo/vector-icons';
 
-const ChatTrainer = ({ navigation }) => {
+const ChatTrainer = ({ navigation, route }) => {
     const [messages, setMessages] = useState([])
     const [loaded, setLoaded] = useState(false)
     const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState(route.params.message)
     const [traineePhoto, setTraineePhoto] = useState('');
     const [myPhoto, setMyPhoto] = useState('');
     const scrollViewRef = useRef();
 
     useEffect(async () => {
+        setMessage(route.params.message)
         const result = await AsyncStorage.getItem('email');
         const traineePhoto = await AsyncStorage.getItem('traineePhoto');
         const myPhoto = await AsyncStorage.getItem('myPhoto');
@@ -32,8 +33,10 @@ const ChatTrainer = ({ navigation }) => {
         setTraineePhoto(traineePhoto)
         setMyPhoto(myPhoto)
 
-        return () => subscribe();
-    }, [])
+        return () => {
+            subscribe();
+        }
+    }, [route])
 
     function sendMessage(){
        ChatRef.add({
@@ -56,7 +59,7 @@ const ChatTrainer = ({ navigation }) => {
     }
     return (
         <KeyboardAvoidingView  style={{flex:1, position:"relative"}}>
-            <ScrollView style={{height:1000, marginBottom:20}} ref={scrollViewRef} onContentSizeChange={() => {
+            <ScrollView style={{height:1000}} ref={scrollViewRef} onContentSizeChange={() => {
                 if(scrollViewRef !== null){scrollViewRef.current.scrollToEnd({ animated: true })}
             }}>
                 
@@ -170,7 +173,8 @@ const styles = StyleSheet.create({
         width: 45,
         height: 45,
         borderRadius: 100,
-        marginTop:10
+        marginTop:10,
+        alignSelf:"flex-start"
     },
 
     traineePhoto:{
