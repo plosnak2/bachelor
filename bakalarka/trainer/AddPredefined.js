@@ -18,7 +18,7 @@ const AddPredefined = ({ navigation, route }) => {
                 usage: 0
             })
             .then((docRef) => {
-                navigation.navigate('PredefinedTrainer')
+                navigation.replace('PredefinedTrainer')
             })
         }
     }
