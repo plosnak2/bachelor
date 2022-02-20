@@ -53,7 +53,7 @@ const HomeTrainer = ({ navigation }) => {
       return(
         <View style={{flex:1}}>
           <ScrollView  style={styles.container}>
-            <TouchableOpacity style={{alignItems:"center"}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName})}>
+            <TouchableOpacity style={{alignItems:"center"}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName, message:""})}>
               <View style={styles.column}>
                 <View style={{flexDirection:"column", alignItems:"center", width: "40%", marginTop: 10}}>
                   <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>

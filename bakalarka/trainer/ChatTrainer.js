@@ -132,7 +132,12 @@ const ChatTrainer = ({ navigation, route }) => {
                 </TouchableOpacity>
                 
             </View>
-            <TextInput style={styles.input} placeholder="Napíšte správu" onSubmitEditing={sendMessage} onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})} onChangeText={newText => setMessage(newText)} value={message}/>
+            <View>
+                <TextInput style={styles.input} placeholder="Napíšte správu" onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})} onChangeText={newText => setMessage(newText)} value={message} multiline/>
+                <TouchableOpacity style={{position:"absolute", bottom:10, right:15}} onPress={sendMessage}>
+                    <Ionicons name='send' size={30} />
+                </TouchableOpacity>
+            </View>
         </KeyboardAvoidingView>
     );
 };
@@ -225,7 +230,8 @@ const styles = StyleSheet.create({
         backgroundColor:"white",
         height:50,
         borderTopWidth:1,
-        paddingLeft:15
+        paddingLeft:15,
+        paddingRight:50
     },
     container: {
         flex: 1,
