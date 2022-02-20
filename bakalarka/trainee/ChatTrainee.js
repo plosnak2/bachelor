@@ -89,6 +89,7 @@ const ChatTrainee = ({ navigation }) => {
                                         <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.traineePhoto}>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                             </View>
                                         </View>

@@ -101,6 +101,7 @@ const ChatTrainer = ({ navigation, route }) => {
                                         <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainerPhoto}>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                             </View>
                                         </View>
