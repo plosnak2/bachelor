@@ -13,6 +13,7 @@ import {View} from "react-native";
 import PredefinedTrainer from './trainer/PredefinedTrainer';
 import AddPredefined from './trainer/AddPredefined';
 import SendPhoto from './trainee/SendPhoto';
+import GaleryTrainee from './trainee/GaleryTrainee';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -40,7 +41,7 @@ export default function App() {
          },
          headerTitleAlign: 'center',
        }}/>
-       <Stack.Screen name="ChatTrainee" component={ChatTrainee} options={({ route }) => ({ 
+       <Stack.Screen name="ChatTrainee" component={ChatTrainee} options={({ route, navigation }) => ({ 
          title: route.params.name,
          headerStyle: {
           backgroundColor: '#c4c4c4'
@@ -49,7 +50,7 @@ export default function App() {
         headerRight: () => 
         <View style={{flexDirection: 'row', paddingRight:0}}>
            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}}/>
-           <Ionicons name='images-outline' size={35} style={{marginLeft: 15}}/>
+           <Ionicons name='images-outline' size={35} style={{marginLeft: 15}} onPress={() => navigation.navigate('GaleryTrainee')}/>
         </View>
         })}/>
         <Stack.Screen name="ChatTrainer" component={ChatTrainer} options={({ route }) => ({ 
@@ -89,6 +90,13 @@ export default function App() {
          },
          headerTitleAlign: 'center',
        }}/>
+       <Stack.Screen name="GaleryTrainee" component={GaleryTrainee} options={{
+          title: 'Galéria',
+          headerStyle: {
+          backgroundColor: '#c4c4c4'
+        },
+        headerTitleAlign: 'center',
+      }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
