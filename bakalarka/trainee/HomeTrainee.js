@@ -22,6 +22,7 @@ const HomeTrainee = ({ navigation }) => {
         setCoachPhoto(coach.data().profilephoto)
         setLoaded(true);
         AsyncStorage.setItem('coachPhoto', coach.data().profilephoto)
+        AsyncStorage.setItem('coachName', coach.data().name)
         AsyncStorage.setItem('myPhoto', user.data().profilephoto)
     }, [])
 

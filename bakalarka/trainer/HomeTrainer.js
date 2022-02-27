@@ -20,11 +20,16 @@ const HomeTrainer = ({ navigation }) => {
         const traineeref = user.data().trainee;
         const trainee = await UsersRef.doc(traineeref).get();
         const query = await ChatRef.orderBy("date", "desc").limit(1).get();
-        setLastMessage(query.docs[0].data().message)
+        if(query.docs[0].data().isPhoto === true) {
+            setLastMessage("Uživateľ odoslal fotku")
+        } else {
+            setLastMessage(query.docs[0].data().message)
+        }
         setTraineePhoto(trainee.data().profilephoto)
         setTraineeName(trainee.data().name)
         AsyncStorage.setItem('myPhoto', user.data().profilephoto)
         AsyncStorage.setItem('traineePhoto', trainee.data().profilephoto)
+        AsyncStorage.setItem('traineeName', trainee.data().name)
       });
 
       return unsubscribe;
@@ -48,7 +53,7 @@ const HomeTrainer = ({ navigation }) => {
       return(
         <View style={{flex:1}}>
           <ScrollView  style={styles.container}>
-            <TouchableOpacity style={{alignItems:"center"}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName})}>
+            <TouchableOpacity style={{alignItems:"center"}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName, message:""})}>
               <View style={styles.column}>
                 <View style={{flexDirection:"column", alignItems:"center", width: "40%", marginTop: 10}}>
                   <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
