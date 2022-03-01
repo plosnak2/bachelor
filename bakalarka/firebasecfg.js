@@ -31,5 +31,6 @@ export const ChatRef = db.collection("messages");
 export const PredefinedRef = db.collection("predefined_messages");
 export const PhotosRef = db.collection("photos");
 export const ExercisesRef = db.collection("exercises");
+export const CalendarRef = db.collection("calendar");
 
 export {firebase, storage};
