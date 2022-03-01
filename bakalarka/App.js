@@ -16,6 +16,7 @@ import SendPhoto from './trainee/SendPhoto';
 import GaleryTrainee from './trainee/GaleryTrainee';
 import GaleryTrainer from './trainer/GaleryTrainer';
 import CalendarTrainee from './trainee/CalendarTrainee';
+import CalendarInfoTrainee from './trainee/CalendarInfoTrainee';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -108,6 +109,13 @@ export default function App() {
     }}/>
     <Stack.Screen name="CalendarTrainee" component={CalendarTrainee} options={{
       title: 'Kalendár',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  }}/>
+    <Stack.Screen name="CalendarInfoTrainee" component={CalendarInfoTrainee} options={{
+      title: 'Tréning',
       headerStyle: {
       backgroundColor: '#c4c4c4'
     },

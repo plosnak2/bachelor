@@ -15,6 +15,8 @@ const CalendarTrainee = ({ navigation }) => {
     const[markedEvents, setMarkedEvents] = useState({})
     const[year, setYear] = useState(Moment(new Date()).format('YYYY'))
     const[month, setMonth] = useState(Moment(new Date()).format('MM'))
+    const [showView, setShowView] = useState(false)
+    const [date, setDate] = useState()
 
     useEffect(() => {
         const subscribe = CalendarRef.orderBy("date", "asc").onSnapshot((QuerySnapshot) => {
@@ -70,16 +72,54 @@ const CalendarTrainee = ({ navigation }) => {
 
         return () => subscribe();
       }, [])
+
+      function dayClicked(day){
+          if(markedEvents[day.dateString] === undefined){
+                ;
+          } else if(markedEvents[day.dateString].dots.length === 1){
+                navigation.navigate('CalendarInfoTrainee', {docId: markedEvents[day.dateString].dots[0].key})
+          } else {
+              setDate(day.dateString)
+              setShowView(true)
+          }
+        
+      }
     
     return(
         <View style={{flex:1}}>
+            {showView && 
+                <ScrollView style={styles.spinnerView}>
+                    <View style={{alignItems:"center"}}>
+                    <Text style={{marginTop:15, fontWeight:"bold", fontSize:20}}>{Moment(date).format('DD.MM.YYYY')}</Text>
+                    <TouchableOpacity style={styles.icon} onPress={() => setShowView(false)}> 
+                        <Ionicons name="close-circle-outline" size={40} color="black"/>
+                    </TouchableOpacity>
+                    {
+                        markedEvents[date].dots.map(exercise => {
+                            return(
+                                
+                                <TouchableOpacity onPress={() => {navigation.navigate('CalendarInfoTrainee', {docId: exercise.key})}} style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10, width:"80%", padding:5}}>
+                                    <View style={{flexDirection:"row", alignItems:"center"}}>
+                                        <Text style={{fontWeight:"bold"}}>{Moment(date).format('DD.MM.YYYY')}</Text>
+                                        <View style={{width:15, height:15, borderRadius:10, backgroundColor:exercise.color, marginLeft:10}}></View>
+                                    </View> 
+                                    <Text style={{marginTop:5}}>{exercise.training}</Text>
+                                    <Text>Dĺžka: {exercise.length} min</Text>
+                                </TouchableOpacity>
+                                
+                            )
+                        })
+                    }
+                    </View>
+                </ScrollView>
+            }
             <ScrollView style={styles.container}>
                 
                 <Calendar 
                 markingType={'multi-dot'}
                 markedDates={markedEvents}
                 onDayPress={day => {
-                    console.log('selected day', markedEvents[day.dateString]);
+                    dayClicked(day);
                 }}
                 onMonthChange={month => {
                     setYear(month.year)
@@ -124,21 +164,21 @@ const CalendarTrainee = ({ navigation }) => {
                                         {
                                             value.dots.map(exercise => {
                                                 return(
-                                                    <View style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10}}>
+                                                    <TouchableOpacity onPress={() => {navigation.navigate('CalendarInfoTrainee', {docId: exercise.key})}} style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10}}>
                                                         <View style={{flexDirection:"row", alignItems:"center"}}>
                                                             <Text style={{fontWeight:"bold"}}>{Moment(key).format('DD.MM.YYYY')}</Text>
                                                             <View style={{width:15, height:15, borderRadius:10, backgroundColor:exercise.color, marginLeft:10}}></View>
                                                         </View> 
                                                         <Text style={{marginTop:5}}>{exercise.training}</Text>
                                                         <Text>Dĺžka: {exercise.length} min</Text>
-                                                    </View>
+                                                    </TouchableOpacity>
                                                 )
                                             })
                                         }
                                         </View>
                                     )
                                 } else {
-                                    console.log("neni")
+                                    
                                 }
                             })
                         }
@@ -173,6 +213,11 @@ const CalendarTrainee = ({ navigation }) => {
 export default CalendarTrainee
 
 const styles = StyleSheet.create({
+    icon:{
+        position: "absolute",
+        top:5,
+        right:10
+    },
     container: {
       flex: 1,
       backgroundColor: "white",
@@ -184,5 +229,16 @@ const styles = StyleSheet.create({
         right: 0,
         alignSelf: 'stretch',
         flex: 1
-    }
+    },
+    spinnerView: {
+        position: "absolute",
+        zIndex: 1,
+        left: "10%",
+        top: "10%",
+        height:"50%",
+        backgroundColor: "#c4c4c4",
+        width:"80%",
+        paddingBottom:50,
+        borderRadius:10
+    },
 })
