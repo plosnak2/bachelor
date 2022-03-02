@@ -77,7 +77,7 @@ const CalendarTrainee = ({ navigation }) => {
           if(markedEvents[day.dateString] === undefined){
                 ;
           } else if(markedEvents[day.dateString].dots.length === 1){
-                navigation.navigate('CalendarInfoTrainee', {docId: markedEvents[day.dateString].dots[0].key})
+                navigation.navigate('CalendarInfoTrainee', {docId: markedEvents[day.dateString].dots[0].key, title:Moment(day.dateString).format('DD.MM.YYYY')})
           } else {
               setDate(day.dateString)
               setShowView(true)
@@ -98,7 +98,7 @@ const CalendarTrainee = ({ navigation }) => {
                         markedEvents[date].dots.map(exercise => {
                             return(
                                 
-                                <TouchableOpacity onPress={() => {navigation.navigate('CalendarInfoTrainee', {docId: exercise.key})}} style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10, width:"80%", padding:5}}>
+                                <TouchableOpacity onPress={() => {navigation.navigate('CalendarInfoTrainee', {docId: exercise.key, title:Moment(date).format('DD.MM.YYYY')})}} style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10, width:"80%", padding:5}}>
                                     <View style={{flexDirection:"row", alignItems:"center"}}>
                                         <Text style={{fontWeight:"bold"}}>{Moment(date).format('DD.MM.YYYY')}</Text>
                                         <View style={{width:15, height:15, borderRadius:10, backgroundColor:exercise.color, marginLeft:10}}></View>
@@ -164,7 +164,7 @@ const CalendarTrainee = ({ navigation }) => {
                                         {
                                             value.dots.map(exercise => {
                                                 return(
-                                                    <TouchableOpacity onPress={() => {navigation.navigate('CalendarInfoTrainee', {docId: exercise.key})}} style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10}}>
+                                                    <TouchableOpacity onPress={() => {navigation.navigate('CalendarInfoTrainee', {docId: exercise.key, title:Moment(key).format('DD.MM.YYYY')})}} style={{backgroundColor: "white", marginTop:10, marginBottom:10, alignItems:"center", borderRadius:10}}>
                                                         <View style={{flexDirection:"row", alignItems:"center"}}>
                                                             <Text style={{fontWeight:"bold"}}>{Moment(key).format('DD.MM.YYYY')}</Text>
                                                             <View style={{width:15, height:15, borderRadius:10, backgroundColor:exercise.color, marginLeft:10}}></View>

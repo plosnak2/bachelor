@@ -114,13 +114,14 @@ export default function App() {
     },
     headerTitleAlign: 'center',
   }}/>
-    <Stack.Screen name="CalendarInfoTrainee" component={CalendarInfoTrainee} options={{
-      title: 'Tréning',
+    <Stack.Screen name="CalendarInfoTrainee" component={CalendarInfoTrainee} options={({route}) => ({
+      title: route.params.title,
       headerStyle: {
       backgroundColor: '#c4c4c4'
     },
     headerTitleAlign: 'center',
-  }}/>
+  })}/>
+  
       </Stack.Navigator>
     </NavigationContainer>
   );

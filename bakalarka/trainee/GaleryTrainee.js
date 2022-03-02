@@ -68,7 +68,7 @@ const GaleryTrainee = ({ navigation }) => {
                             })
                         }
                 </ScrollView>
-            <NavbarTrainee />
+            
         </View>
     )
 };
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "white",
-      marginBottom:70,
+      
       padding:15
     }
 })
