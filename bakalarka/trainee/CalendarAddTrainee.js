@@ -13,6 +13,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {ExercisesRef} from '../firebasecfg'
 import firebase from "firebase";
 import "firebase/firestore";
+import NumericInput from 'react-native-numeric-input'
 
 const CalendarAddTrainee = ({ navigation, route }) => {
     const [date, setDate] = useState(new Date());
@@ -24,6 +25,7 @@ const CalendarAddTrainee = ({ navigation, route }) => {
     const [items, setItems] = useState([]);
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
+    const [min, setMin] = useState(0)
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
@@ -62,6 +64,8 @@ const CalendarAddTrainee = ({ navigation, route }) => {
         } else {
             if(message === ''){
                 Alert.alert("Chyba", "Vyplňte pocity z tréningu")
+            } else if(min === 0){
+                Alert.alert("Chyba", "Vyplňte dĺžku trvania tréningu")
             } else {
                 let training;
                 if(value === "Pridať nový"){
@@ -72,7 +76,15 @@ const CalendarAddTrainee = ({ navigation, route }) => {
                 } else {
                     training = value
                 }
-                console.log(training)
+                CalendarRef.add({
+                    date: date,
+                    description: message,
+                    length: min,
+                    training: training
+                })
+                .then(() => {
+                    navigation.navigate('CalendarTrainee')
+                })
             }
         }
     }
@@ -100,9 +112,11 @@ const CalendarAddTrainee = ({ navigation, route }) => {
                 
                 <View style={{borderBottomWidth:1, marginTop:25}}></View>
                 
-                <Text style={{fontSize:18, fontWeight:"bold", textAlign:"center", marginTop:30}}>Zadajte dĺžku trvania tréningu</Text>
-                
-                
+                <Text style={{fontSize:18, fontWeight:"bold", textAlign:"center", marginTop:30}}>Zadajte dĺžku trvania tréningu v min</Text>
+                <View style={{alignItems:"center", marginTop:10}}>
+                    <NumericInput onChange={value => setMin(value)} value={min} totalWidth={120} rounded rightButtonBackgroundColor='#c4c4c4'
+                    leftButtonBackgroundColor='#c4c4c4' minValue={0}/>
+                </View>
 
                 <View style={{borderBottomWidth:1, marginTop:25}}></View>
                 <Text style={{fontSize:18, fontWeight:"bold", textAlign:"center", marginTop:30}}>Zadajte typ tréningu</Text>

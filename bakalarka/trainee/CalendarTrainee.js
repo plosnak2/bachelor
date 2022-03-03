@@ -106,7 +106,7 @@ const CalendarTrainee = ({ navigation }) => {
                                     </View> 
                                     <Text style={{marginTop:5}}>{exercise.training}</Text>
                                     <Text>Dĺžka: {exercise.length} min</Text>
-                                    <Text style={{marginTop:5, marginBottom:5, fontWeight:"bold", textAlign:"center"}} numberOfLines={2}>{exercise.description}</Text>
+                                    <Text style={{marginTop:5, marginBottom:5, fontWeight:"bold", textAlign:"center", padding:5}} numberOfLines={2}>{exercise.description}</Text>
                                 </TouchableOpacity>
                                 
                             )
@@ -173,7 +173,7 @@ const CalendarTrainee = ({ navigation }) => {
                                                         </View> 
                                                         <Text style={{marginTop:5}}>{exercise.training}</Text>
                                                         <Text>Dĺžka: {exercise.length} min</Text>
-                                                        <Text style={{marginTop:5, marginBottom:5, fontWeight:"bold", textAlign:"center"}} numberOfLines={2}>{exercise.description}</Text>
+                                                        <Text style={{marginTop:5, marginBottom:5, fontWeight:"bold", textAlign:"center",padding:5}} numberOfLines={2}>{exercise.description}</Text>
                                                     </TouchableOpacity>
                                                 )
                                             })
