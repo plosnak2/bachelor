@@ -191,7 +191,7 @@ const CalendarTrainee = ({ navigation }) => {
             </ScrollView>
             <NavbarTrainee />
             <TouchableOpacity style={styles.navbar} onPress={() =>
-                console.log("pressed")
+                navigation.navigate('CalendarAddTrainee')
               }>
                 <View >
                     <Ionicons name="add-circle" size={70} color="#73fae1" />
