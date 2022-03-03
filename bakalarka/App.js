@@ -17,6 +17,8 @@ import GaleryTrainee from './trainee/GaleryTrainee';
 import GaleryTrainer from './trainer/GaleryTrainer';
 import CalendarTrainee from './trainee/CalendarTrainee';
 import CalendarInfoTrainee from './trainee/CalendarInfoTrainee';
+import CalendarTrainer from './trainer/CalendarTrainer';
+import CalendarInfoTrainer from './trainer/CalendarInfoTrainer';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -64,7 +66,7 @@ export default function App() {
          headerTitleAlign: 'center',
          headerRight: () => 
          <View style={{flexDirection: 'row', paddingRight:0}}>
-            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}}/>
+            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('CalendarTrainer')}/>
             <Ionicons name='images-outline' size={35} style={{marginLeft: 15}} onPress={() => navigation.navigate('GaleryTrainer')}/>
          </View>
         })}/>
@@ -121,7 +123,20 @@ export default function App() {
     },
     headerTitleAlign: 'center',
   })}/>
-  
+    <Stack.Screen name="CalendarTrainer" component={CalendarTrainer} options={{
+      title: 'Kalendár',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  }}/>
+    <Stack.Screen name="CalendarInfoTrainer" component={CalendarInfoTrainer} options={({route}) => ({
+      title: route.params.title,
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
