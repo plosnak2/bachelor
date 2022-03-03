@@ -36,7 +36,7 @@ const CalendarTrainee = ({ navigation }) => {
                         
                         
                         
-                        dots: [{key: doc.id, color: trainings[doc.data().training],selectedDotColor: trainings[doc.data().training], training: doc.data().training, length: doc.data().length}]
+                        dots: [{key: doc.id, color: trainings[doc.data().training],selectedDotColor: trainings[doc.data().training], training: doc.data().training, length: doc.data().length, description: doc.data().description}]
                     }
                 } else {
                     let color;
@@ -52,7 +52,8 @@ const CalendarTrainee = ({ navigation }) => {
                         color: trainings[doc.data().training],
                         selectedDotColor: trainings[doc.data().training],
                         training: doc.data().training,
-                        length: doc.data().length
+                        length: doc.data().length,
+                        description: doc.data().description
                     }
                     tempMarkedEvents[Moment(new Date(doc.data().date.toDate())).format('YYYY-MM-DD')].dots.push(obj)
                 }
@@ -105,6 +106,7 @@ const CalendarTrainee = ({ navigation }) => {
                                     </View> 
                                     <Text style={{marginTop:5}}>{exercise.training}</Text>
                                     <Text>Dĺžka: {exercise.length} min</Text>
+                                    <Text style={{marginTop:5, marginBottom:5, fontWeight:"bold", textAlign:"center"}} numberOfLines={2}>{exercise.description}</Text>
                                 </TouchableOpacity>
                                 
                             )
@@ -127,7 +129,7 @@ const CalendarTrainee = ({ navigation }) => {
                 }}
                 />
                 <View style={{padding:"5%", flexDirection:"row", paddingBottom:50}}>
-                    <View style={{width:"45%", backgroundColor:"#c4c4c4", flexDirection:"column", borderRadius:10, alignItems:"center"}}>
+                    <View style={{width:"100%", backgroundColor:"#c4c4c4", flexDirection:"column", borderRadius:10, alignItems:"center"}}>
                         {(() => {
                             if(month == 1){
                                 return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Januári</Text>)
@@ -171,6 +173,7 @@ const CalendarTrainee = ({ navigation }) => {
                                                         </View> 
                                                         <Text style={{marginTop:5}}>{exercise.training}</Text>
                                                         <Text>Dĺžka: {exercise.length} min</Text>
+                                                        <Text style={{marginTop:5, marginBottom:5, fontWeight:"bold", textAlign:"center"}} numberOfLines={2}>{exercise.description}</Text>
                                                     </TouchableOpacity>
                                                 )
                                             })
@@ -183,19 +186,7 @@ const CalendarTrainee = ({ navigation }) => {
                             })
                         }
                 </View>
-                <View style={{width:"45%", backgroundColor:"#c4c4c4", flexDirection:"column", marginLeft:"10%", borderRadius:10, alignItems:"center"}}>
-                        <Text style={{fontSize:20, fontWeight:"bold"}}>Legenda</Text>
-                        {
-                            Object.entries(trainings).map(([key, value]) => {
-                                return(
-                                    <View style={{flexDirection:"row", marginTop:20, alignItems:"center", width:"90%", alignSelf:"center"}}>
-                                        <View style={{width:15, height:15, borderRadius:10, backgroundColor:value}}></View>
-                                        <Text style={{fontWeight:"bold", marginLeft:15}}>{key}</Text>
-                                    </View>
-                                )
-                            })
-                        }
-                </View>
+                
             </View>
             </ScrollView>
             <NavbarTrainee />
