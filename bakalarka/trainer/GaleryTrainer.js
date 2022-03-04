@@ -94,7 +94,7 @@ const GaleryTrainer = ({ navigation }) => {
                                         <View style={{flexDirection:"row"}}>
                                             <Text style={{fontSize:17, fontWeight:"bold", marginTop:10}}>{key}</Text>
                                             <TouchableOpacity onPress={() => {setShowView(true); setOldName(key); setNewName(key)}}>
-                                                <Ionicons name='settings' size={35} style={{marginLeft: 10}}/>
+                                                <Ionicons name='pencil' size={30} style={{marginLeft: 10}}/>
                                             </TouchableOpacity>
                                         </View>
                                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, marginTop:15}}>
