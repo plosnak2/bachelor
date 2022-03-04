@@ -16,6 +16,7 @@ const ChatTrainee = ({ navigation }) => {
     const [myPhoto, setMyPhoto] = useState('');
     const [coachName, setCoachName] = useState('')
     const scrollViewRef = useRef();
+    const [today,setToday] = useState(Moment(new Date()).format('YYYY-MM-DD'))
 
     useEffect(async () => {
         const result = await AsyncStorage.getItem('email');
@@ -35,6 +36,8 @@ const ChatTrainee = ({ navigation }) => {
         setCoachPhoto(coachPhoto)
         setMyPhoto(myPhoto) 
         setCoachName(coachName)
+        //console.log(Moment(new Date() - 86400000).format('YYYY-MM-DD'))
+        
         return () => subscribe();
     }, [])
 
@@ -94,7 +97,21 @@ const ChatTrainee = ({ navigation }) => {
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                             </View>
                                         </View>
-                                        <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:"77%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:"69%", fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
                                     </View>
                                 )
                             } else {
@@ -106,7 +123,22 @@ const ChatTrainee = ({ navigation }) => {
                                                 <Text>{message.message}</Text>
                                             </View>
                                         </View>
-                                        <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:"77%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:"69%", fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
+                                        
                                     </View>
                                 )
                             }
@@ -120,7 +152,21 @@ const ChatTrainee = ({ navigation }) => {
                                             <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                         </View>
                                     </View>
-                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                    {(() => {
+                                        if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                            return(
+                                                <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                            )
+                                        } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                            return(
+                                                <Text style={{marginLeft:60, fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                            )
+                                        }else {
+                                            return(
+                                                <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                            )
+                                        }
+                                    })()}
                                 </View>
                             } else {
                                 return(
@@ -131,7 +177,22 @@ const ChatTrainee = ({ navigation }) => {
                                                 <Text>{message.message}</Text>
                                             </View>
                                         </View>
-                                        <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
+                                        
                                     </View>
                                 )
                             }
