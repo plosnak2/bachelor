@@ -20,6 +20,7 @@ import CalendarInfoTrainee from './trainee/CalendarInfoTrainee';
 import CalendarTrainer from './trainer/CalendarTrainer';
 import CalendarInfoTrainer from './trainer/CalendarInfoTrainer';
 import CalendarAddTrainee from './trainee/CalendarAddTrainee';
+import PhotoSettings from './trainer/PhotoSettings';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -140,6 +141,13 @@ export default function App() {
   })}/>
     <Stack.Screen name="CalendarAddTrainee" component={CalendarAddTrainee} options={({}) => ({
       title: 'Pridať tréning',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
+    <Stack.Screen name="PhotoSettings" component={PhotoSettings} options={({}) => ({
+      title: 'Nastavenia fotky',
       headerStyle: {
       backgroundColor: '#c4c4c4'
     },

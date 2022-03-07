@@ -82,7 +82,7 @@ const SendPhoto = ({ navigation, route }) => {
                 const snapshot = await ref.put(blob);
                 const imageUrl = await snapshot.ref.getDownloadURL();
                 const email = await AsyncStorage.getItem('email');
-                PhotosRef.add({
+                const photoRef = await PhotosRef.add({
                     category: category,
                     comment: "",
                     commented: false,
@@ -95,7 +95,8 @@ const SendPhoto = ({ navigation, route }) => {
                     from: email,
                     isPhoto: true,
                     message: imageUrl,
-                    category: category
+                    category: category,
+                    photo: photoRef.id
                 })
             } catch (e) {
                 alert("Nepodarilo sa odoslať fotku");
