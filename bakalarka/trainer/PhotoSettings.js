@@ -10,6 +10,8 @@ const PhotoSettings = ({ navigation, route }) => {
     const [photo, setPhoto] = useState()
     const [loading, setLoading] = useState(true)
     const [otherPhotos, setOtherPhotos] = useState([])
+    const [actualId, setActualId] = useState(route.params.photo)
+    const [docIds, setDocIds] = useState([])
 
     useEffect(async () => {
         const docpic = await PhotosRef.doc(route.params.photo).get();
@@ -17,13 +19,16 @@ const PhotoSettings = ({ navigation, route }) => {
         setLoading(false)
         const snapshot = await PhotosRef.orderBy("date", "desc").get();
         let pics = []
+        let ids = []
         snapshot.forEach(doc => {
             if(doc.data().category === docpic.data().category){
                 pics.push(doc.data())
+                ids.push(doc.id)
             }
             
         });
         setOtherPhotos(pics)
+        setDocIds(ids)
     }, [])
 
     if(loading){
@@ -43,7 +48,7 @@ const PhotoSettings = ({ navigation, route }) => {
                         </View>
                         <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
                         <View style={{flexDirection:"row", marginTop:30, marginLeft:"5%"}}> 
-                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer')} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center"}}>
+                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer', {uri: photo.photourl, docId: actualId, category: photo.category})} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center"}}>
                                 <Text>Upraviť fotku</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"10%"}}>
@@ -54,9 +59,9 @@ const PhotoSettings = ({ navigation, route }) => {
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold", marginBottom:15}}>Ďalšie fotky z kategórie {photo.category}</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{paddingBottom:20}}>
                         {
-                            otherPhotos.map(photo => {
+                            otherPhotos.map((photo, index) => {
                                 return(
-                                    <TouchableOpacity onPress={() => setPhoto(photo)}>
+                                    <TouchableOpacity onPress={() => {setPhoto(photo); setActualId(docIds[index])}}>
                                         <Image source={{ uri: photo.photourl }} style={{ width: 100, height: 100, marginRight:10}} />
                                     </TouchableOpacity>
                                 )

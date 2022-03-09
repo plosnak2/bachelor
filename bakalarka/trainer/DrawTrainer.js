@@ -22,21 +22,30 @@ import Svg, {
 } from 'react-native-svg';
 
 import { Ionicons } from '@expo/vector-icons';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions, Text, TouchableOpacity } from 'react-native';
 import { captureRef } from "react-native-view-shot";
 import firebase from "firebase";
 import "firebase/firestore";
 import { storage } from "../firebasecfg";
 import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
+import { OverlaySpinner } from "../shared/OverlaySpinner";
+import { PhotosRef } from "../firebasecfg";
+import { ChatRef } from "../firebasecfg";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function DrawTrainer({navigation}){
+export default function DrawTrainer({navigation, route}){
     const [points, setPoints] = useState("")
     const [lines, setLines] = useState([])
     const [currentColor, setCurrentColor] = useState("purple")
     const [showColors, setShowColors] = useState(false)
     const [colors, setColors] = useState([])
+    const [showSpinner, setShowSpinner] = useState(false)
     const cardRef = useRef();
+
+    useEffect(async () => {
+      console.log(route.params.category)
+    }, [])
 
     function touch(e){
       const tmp = points + " " + Math.trunc(e.nativeEvent.locationX) + "," + Math.trunc(e.nativeEvent.locationY)
@@ -78,6 +87,7 @@ export default function DrawTrainer({navigation}){
     };
 
     const saveAsImage = async () => {
+      setShowSpinner(true)
       try {
         const result = await captureRef(cardRef, {
           result: "tmpfile",
@@ -93,17 +103,33 @@ export default function DrawTrainer({navigation}){
             const snapshot = await ref.put(blob);
             const imageUrl = await snapshot.ref.getDownloadURL();
             console.log(imageUrl)
+            const email = await AsyncStorage.getItem('email');
             
+            const res = await PhotosRef.doc(route.params.docId).update({
+              commented: true,
+              edited: firebase.firestore.FieldValue.arrayUnion(imageUrl)
+            })
+            ChatRef.add({
+              date: new Date(),
+              from: email,
+              isPhoto: true,
+              message: imageUrl,
+              category: route.params.category,
+              photo: route.params.docId
+          })
         } catch (e) {
             alert("Nepodarilo sa odoslať fotku");
-            
+            setShowSpinner(false)
         } finally {
+            const traineeName = await AsyncStorage.getItem('traineeName');
             blob.close();
-            
+            setShowSpinner(false)
+            navigation.navigate('ChatTrainer',{name: traineeName, message:""})
         }
         
       } catch (e) {
         console.log(e);
+        setShowSpinner(false)
       }
     };
 
@@ -124,7 +150,7 @@ export default function DrawTrainer({navigation}){
         height="100%"
         
        
-        href={'https://firebasestorage.googleapis.com/v0/b/bachelor-59d72.appspot.com/o/07893737-acdd-4d38-976d-87b7c7f39aa9.jpg?alt=media&token=8fd10cad-2ddd-4144-8257-2ce099c57eb5'}
+        href={route.params.uri}
         clipPath="url(#clip)"
       />
       {
@@ -174,6 +200,7 @@ export default function DrawTrainer({navigation}){
             <TouchableOpacity onPress={() => {setCurrentColor("black"); setShowColors(false)}} style={{width:40, height:40, borderRadius:20, backgroundColor:"black", alignSelf:"center"}} />
             </View>
           }
+          {showSpinner && <OverlaySpinner />}
       </View>
     );
   
