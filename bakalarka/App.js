@@ -21,6 +21,7 @@ import CalendarTrainer from './trainer/CalendarTrainer';
 import CalendarInfoTrainer from './trainer/CalendarInfoTrainer';
 import CalendarAddTrainee from './trainee/CalendarAddTrainee';
 import PhotoSettings from './trainer/PhotoSettings';
+import DrawTrainer from './trainer/DrawTrainer';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -153,6 +154,7 @@ export default function App() {
     },
     headerTitleAlign: 'center',
   })}/>
+    <Stack.Screen name="DrawTrainer" component={DrawTrainer} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

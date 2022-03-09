@@ -43,7 +43,7 @@ const PhotoSettings = ({ navigation, route }) => {
                         </View>
                         <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
                         <View style={{flexDirection:"row", marginTop:30, marginLeft:"5%"}}> 
-                            <TouchableOpacity style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center"}}>
+                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer')} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center"}}>
                                 <Text>Upraviť fotku</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"10%"}}>
