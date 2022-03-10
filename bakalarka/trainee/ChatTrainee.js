@@ -151,7 +151,7 @@ const ChatTrainee = ({ navigation }) => {
                                             <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainerPhoto}>
                                                 <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
-                                                <TouchableOpacity>
+                                                <TouchableOpacity onPress={() => navigation.navigate('EditedImagesTrainee', {docId: message.photo})}>
                                                     <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                                 </TouchableOpacity>
                                             </View>
