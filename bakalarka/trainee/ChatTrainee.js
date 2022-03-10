@@ -145,29 +145,34 @@ const ChatTrainee = ({ navigation }) => {
                         } else {
                             // trener
                             if(message.isPhoto === true){
-                                <View style={{flexDirection:"column"}}>
-                                    <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
-                                        <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
-                                        <View style={styles.trainerPhoto}>
-                                            <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                return(
+                                    <View style={{flexDirection:"column"}}>
+                                        <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
+                                            <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
+                                            <View style={styles.trainerPhoto}>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
+                                                <TouchableOpacity>
+                                                    <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
                                     </View>
-                                    {(() => {
-                                        if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
-                                            return(
-                                                <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
-                                            )
-                                        } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
-                                            return(
-                                                <Text style={{marginLeft:60, fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
-                                            )
-                                        }else {
-                                            return(
-                                                <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
-                                            )
-                                        }
-                                    })()}
-                                </View>
+                                )
                             } else {
                                 return(
                                     <View style={{flexDirection:"column"}}>
