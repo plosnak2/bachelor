@@ -4,7 +4,9 @@ import NavbarTrainer from "./Navbar";
 import { PredefinedRef } from "../firebasecfg";
 import { PhotosRef } from "../firebasecfg";
 import Moment from 'moment';
-
+import { Ionicons } from '@expo/vector-icons';
+import { ChatRef } from "../firebasecfg";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PhotoSettings = ({ navigation, route }) => {
     const [photo, setPhoto] = useState()
@@ -12,9 +14,11 @@ const PhotoSettings = ({ navigation, route }) => {
     const [otherPhotos, setOtherPhotos] = useState([])
     const [actualId, setActualId] = useState(route.params.photo)
     const [docIds, setDocIds] = useState([])
+    const [showView, setShowView] = useState(false)
+    const [comment, setComment] = useState('')
 
     useEffect(async () => {
-        const docpic = await PhotosRef.doc(route.params.photo).get();
+        const docpic = await PhotosRef.doc(actualId).get();
         setPhoto(docpic.data())
         setLoading(false)
         const snapshot = await PhotosRef.orderBy("date", "desc").get();
@@ -29,7 +33,37 @@ const PhotoSettings = ({ navigation, route }) => {
         });
         setOtherPhotos(pics)
         setDocIds(ids)
-    }, [])
+        setComment(docpic.data().comment)
+        console.log(actualId)
+    }, [actualId])
+
+    async function sendComment() {
+        if(comment == ""){
+            ;
+        } else if(comment == photo.comment){
+            ;
+        } else {
+            const email = await AsyncStorage.getItem('email');
+            const res = await PhotosRef.doc(actualId).update({
+                commented: true,
+                comment: comment
+            })
+            const res2 = await ChatRef.add({
+                date: new Date(),
+                from: email,
+                isPhoto: true,
+                message: photo.photourl,
+                category: photo.category,
+                photo: actualId
+            })
+            const res3 = await ChatRef.add({
+                date: new Date(),
+                from: email,
+                isPhoto: false,
+                message: "Tréner komentoval fotku: " + comment
+            })
+        }
+    }
 
     if(loading){
         return( 
@@ -47,14 +81,60 @@ const PhotoSettings = ({ navigation, route }) => {
                             <Text style={{fontSize:18, position:"absolute", right:10}}>{Moment(new Date(photo.date.toDate())).format('DD.MM.YYYY')}</Text>
                         </View>
                         <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
-                        <View style={{flexDirection:"row", marginTop:30, marginLeft:"5%"}}> 
-                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer', {uri: photo.photourl, docId: actualId, category: photo.category})} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center"}}>
+                        <View style={{flexDirection:"row", marginTop:30}}> 
+                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer', {uri: photo.photourl, docId: actualId, category: photo.category})} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"30%"}}>
                                 <Text>Upraviť fotku</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"10%"}}>
-                                <Text>Pridať komentár</Text>
+                            
+                        </View>
+                        <View style={{borderWidth:1, marginTop:15}}></View>
+                        <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Editované fotky:</Text>
+                        {
+                            photo.edited.length != 0 ?
+                            photo.edited.map((url, index) => {
+                                return(
+                                    <Image source={{ uri: url }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain", marginTop:15}} />
+                                )
+                            }) : 
+                            <Text style={{fontSize:18, marginTop:15}}>Túto fotku ste ešte needitovali.</Text>
+                        }
+                        <View style={{borderWidth:1, marginTop:15}}></View>
+
+                        <View style={{flexDirection:"row"}}>
+                            <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Váš komentár:</Text>
+                            <TouchableOpacity onPress={() => {setShowView(true); console.log(showView)}}>
+                                <Ionicons name='pencil' size={30} style={{marginLeft: 10, marginTop:10}}/>
                             </TouchableOpacity>
                         </View>
+                        {
+                            comment.length != 0 ?
+                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                                {   showView ?
+                                    <TextInput style={{width:"90%", backgroundColor:"white", borderRadius:10, alignSelf:"center", padding:10}} onChangeText={newText => setComment(newText)} value={comment}/>
+                                    :
+                                    <Text>{comment}</Text>
+                                    
+                                }
+                                
+                            </View> :
+
+                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                                {   showView ?
+                                    <TextInput style={{width:"90%", backgroundColor:"white", borderRadius:10, alignSelf:"center", padding:10}} onChangeText={newText => setComment(newText)} value={comment} placeholder="Napíšte komentár"/>
+                                    :
+                                    
+                                    <Text>Zatiaľ ste túto fotku nekomentovali.</Text>
+                                }
+                                
+                            </View>
+                        }
+                        {
+                            showView && 
+                            <TouchableOpacity onPress={() => {setShowView(false); sendComment()}} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"30%", marginTop:10}}>
+                                <Text>Uložiť</Text>
+                            </TouchableOpacity>
+                        }
+
                         <View style={{borderWidth:1, marginTop:15}}></View>
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold", marginBottom:15}}>Ďalšie fotky z kategórie {photo.category}</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{paddingBottom:20}}>
@@ -91,5 +171,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         padding: 10
-    }
+    },
+    spinnerView: {
+        position: "absolute",
+        zIndex: 1,
+        left: "10%",
+        top: "20%",
+        height:"50%",
+        backgroundColor: "#c4c4c4",
+        width:"80%",
+        paddingBottom:50,
+        borderRadius:10
+    },
 })
