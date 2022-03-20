@@ -15,6 +15,14 @@ import AddPredefined from './trainer/AddPredefined';
 import SendPhoto from './trainee/SendPhoto';
 import GaleryTrainee from './trainee/GaleryTrainee';
 import GaleryTrainer from './trainer/GaleryTrainer';
+import CalendarTrainee from './trainee/CalendarTrainee';
+import CalendarInfoTrainee from './trainee/CalendarInfoTrainee';
+import CalendarTrainer from './trainer/CalendarTrainer';
+import CalendarInfoTrainer from './trainer/CalendarInfoTrainer';
+import CalendarAddTrainee from './trainee/CalendarAddTrainee';
+import PhotoSettings from './trainer/PhotoSettings';
+import DrawTrainer from './trainer/DrawTrainer';
+import EditedImagesTrainee from './trainee/EditedImagesTrainee';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -50,7 +58,7 @@ export default function App() {
         headerTitleAlign: 'center',
         headerRight: () => 
         <View style={{flexDirection: 'row', paddingRight:0}}>
-           <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}}/>
+           <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('CalendarTrainee')}/>
            <Ionicons name='images-outline' size={35} style={{marginLeft: 15}} onPress={() => navigation.navigate('GaleryTrainee')}/>
         </View>
         })}/>
@@ -62,7 +70,7 @@ export default function App() {
          headerTitleAlign: 'center',
          headerRight: () => 
          <View style={{flexDirection: 'row', paddingRight:0}}>
-            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}}/>
+            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('CalendarTrainer')}/>
             <Ionicons name='images-outline' size={35} style={{marginLeft: 15}} onPress={() => navigation.navigate('GaleryTrainer')}/>
          </View>
         })}/>
@@ -105,6 +113,56 @@ export default function App() {
       },
       headerTitleAlign: 'center',
     }}/>
+    <Stack.Screen name="CalendarTrainee" component={CalendarTrainee} options={{
+      title: 'Kalendár',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  }}/>
+    <Stack.Screen name="CalendarInfoTrainee" component={CalendarInfoTrainee} options={({route}) => ({
+      title: route.params.title,
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
+    <Stack.Screen name="CalendarTrainer" component={CalendarTrainer} options={{
+      title: 'Kalendár',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  }}/>
+    <Stack.Screen name="CalendarInfoTrainer" component={CalendarInfoTrainer} options={({route}) => ({
+      title: route.params.title,
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
+    <Stack.Screen name="CalendarAddTrainee" component={CalendarAddTrainee} options={({}) => ({
+      title: 'Pridať tréning',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
+    <Stack.Screen name="PhotoSettings" component={PhotoSettings} options={({}) => ({
+      title: 'Nastavenia fotky',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
+    <Stack.Screen name="DrawTrainer" component={DrawTrainer} options={{ headerShown: false }}/>
+    <Stack.Screen name="EditedImagesTrainee" component={EditedImagesTrainee} options={({}) => ({
+      title: 'Upravené fotky',
+      headerStyle: {
+      backgroundColor: '#c4c4c4'
+    },
+    headerTitleAlign: 'center',
+  })}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

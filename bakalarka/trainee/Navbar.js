@@ -9,24 +9,17 @@ const NavbarTrainee = () => {
     return (
         <View>
         <View style={styles.navbar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {navigation.navigate('HomeTrainee')}}>
             <View style={styles.item1}>
                 <Ionicons name="chatbox-ellipses-outline" size={40} color="black" />
                 <Text style={styles.text}>Chat</Text>
             </View>
             </TouchableOpacity>
             
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('CalendarTrainee')}>
             <View style={styles.item2}>
                 <Ionicons name="calendar-outline" size={40} color="black" />
                 <Text style={styles.text}>Kalendár</Text>
-            </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-            <View style={styles.item3}>
-                <Ionicons name="camera-outline" size={40} color="black" />
-                <Text style={styles.text}>Kamera</Text>
             </View>
             </TouchableOpacity>
 
@@ -57,8 +50,8 @@ const styles = StyleSheet.create({
         height: 70,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:25,
-        paddingRight:25,
+        paddingLeft:40,
+        paddingRight:40,
         width: "100%",
         paddingTop:5,
       

@@ -14,6 +14,7 @@ const ChatTrainer = ({ navigation, route }) => {
     const [traineePhoto, setTraineePhoto] = useState('');
     const [myPhoto, setMyPhoto] = useState('');
     const scrollViewRef = useRef();
+    const [today,setToday] = useState(Moment(new Date()).format('YYYY-MM-DD'))
 
     useEffect(async () => {
         setMessage(route.params.message)
@@ -73,10 +74,25 @@ const ChatTrainer = ({ navigation, route }) => {
                                         <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.traineePhoto}>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                             </View>
                                         </View>
-                                        <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:"77%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:"69%", fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
                                     </View>
                                 )
                             }
@@ -91,7 +107,21 @@ const ChatTrainer = ({ navigation, route }) => {
                                             <Ionicons name='pin' size={35}/>
                                         </TouchableOpacity>
                                     </View>
-                                    <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                    {(() => {
+                                        if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                            return(
+                                                <Text style={{marginLeft:"77%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                            )
+                                        } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                            return(
+                                                <Text style={{marginLeft:"69%", fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                            )
+                                        }else {
+                                            return(
+                                                <Text style={{marginLeft:"63%", fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                            )
+                                        }
+                                    })()}
                                 </View>
                             )
                         } else {
@@ -102,10 +132,26 @@ const ChatTrainer = ({ navigation, route }) => {
                                             <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainerPhoto}>
                                                 <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
+                                                <TouchableOpacity onPress={() => navigation.navigate('PhotoSettings', {photo: message.photo})}>
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                                </TouchableOpacity>
                                             </View>
                                         </View>
-                                        <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
                                     </View>
                                 )
                             } else {
@@ -117,7 +163,21 @@ const ChatTrainer = ({ navigation, route }) => {
                                                 <Text>{message.message}</Text>
                                             </View>
                                         </View>
-                                        <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                        {(() => {
+                                            if(today === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            } else if(Moment(new Date() - 86400000).format('YYYY-MM-DD') === Moment(message.date.toDate()).format('YYYY-MM-DD')){
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>Včera {Moment(new Date(message.date.toDate())).format('HH:mm')}</Text>
+                                                )
+                                            }else {
+                                                return(
+                                                    <Text style={{marginLeft:60, fontSize:10}}>{Moment(new Date(message.date.toDate())).format('DD.MM.YYYY HH:mm')}</Text>
+                                                )
+                                            }
+                                        })()}
                                     </View>
                                 )
                             } 
