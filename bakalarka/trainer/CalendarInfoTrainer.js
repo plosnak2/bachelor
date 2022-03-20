@@ -21,7 +21,7 @@ const CalendarInfoTrainer = ({ navigation, route }) => {
     if(loading){
         return(
             <View style={[styles.container2, styles.horizontal]}>
-                <ActivityIndicator size="large" color="#0782F9"/>
+                <ActivityIndicator size="large" color="#3ca0e7"/>
             </View>
         )
     } else {
@@ -36,9 +36,9 @@ const CalendarInfoTrainer = ({ navigation, route }) => {
                         <Text style={{fontSize:20, fontWeight:"bold"}}>Trvanie tréningu: </Text>
                         <Text style={{fontSize:20}}>{training.length} min</Text>
                     </View>
-                    <View style={{borderBottomWidth:1, marginTop:15}}></View>
+                    <View style={{borderBottomWidth:1, marginTop:15, borderBottomColor:"#3ca0e7"}}></View>
                     <Text style={{fontSize:20, fontWeight:"bold", marginTop:15, marginLeft:30}}>Popis:</Text>
-                    <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                    <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#3ca0e7", padding:20, borderRadius:20}}>
                         <Text>{training.description}</Text>
                     </View>
                 </ScrollView>

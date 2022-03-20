@@ -68,7 +68,7 @@ const PhotoSettings = ({ navigation, route }) => {
     if(loading){
         return( 
             <View style={[styles.container2, styles.horizontal]}>
-                <ActivityIndicator size="large" color="#0782F9"/>
+                <ActivityIndicator size="large" color="#3ca0e7"/>
             </View>
         )
     } else {
@@ -82,12 +82,12 @@ const PhotoSettings = ({ navigation, route }) => {
                         </View>
                         <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
                         <View style={{flexDirection:"row", marginTop:30}}> 
-                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer', {uri: photo.photourl, docId: actualId, category: photo.category})} style={{width:"40%", backgroundColor:"#c4c4c4", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"30%"}}>
+                            <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer', {uri: photo.photourl, docId: actualId, category: photo.category})} style={{width:"40%", backgroundColor:"#3ca0e7", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"30%"}}>
                                 <Text>Upraviť fotku</Text>
                             </TouchableOpacity>
                             
                         </View>
-                        <View style={{borderWidth:1, marginTop:15}}></View>
+                        <View style={{borderWidth:1, marginTop:15, borderColor:"#3ca0e7"}}></View>
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Editované fotky:</Text>
                         {
                             photo.edited.length != 0 ?
@@ -98,7 +98,7 @@ const PhotoSettings = ({ navigation, route }) => {
                             }) : 
                             <Text style={{fontSize:18, marginTop:15}}>Túto fotku ste ešte needitovali.</Text>
                         }
-                        <View style={{borderWidth:1, marginTop:15}}></View>
+                        <View style={{borderWidth:1, marginTop:15, borderColor:"#3ca0e7"}}></View>
 
                         <View style={{flexDirection:"row"}}>
                             <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Váš komentár:</Text>
@@ -108,7 +108,7 @@ const PhotoSettings = ({ navigation, route }) => {
                         </View>
                         {
                             comment.length != 0 ?
-                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#3ca0e7", padding:20, borderRadius:20}}>
                                 {   showView ?
                                     <TextInput style={{width:"90%", backgroundColor:"white", borderRadius:10, alignSelf:"center", padding:10}} onChangeText={newText => setComment(newText)} value={comment}/>
                                     :
@@ -118,7 +118,7 @@ const PhotoSettings = ({ navigation, route }) => {
                                 
                             </View> :
 
-                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#3ca0e7", padding:20, borderRadius:20}}>
                                 {   showView ?
                                     <TextInput style={{width:"90%", backgroundColor:"white", borderRadius:10, alignSelf:"center", padding:10}} onChangeText={newText => setComment(newText)} value={comment} placeholder="Napíšte komentár"/>
                                     :
@@ -135,7 +135,7 @@ const PhotoSettings = ({ navigation, route }) => {
                             </TouchableOpacity>
                         }
 
-                        <View style={{borderWidth:1, marginTop:15}}></View>
+                        <View style={{borderWidth:1, marginTop:15, borderColor:"#3ca0e7"}}></View>
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold", marginBottom:15}}>Ďalšie fotky z kategórie {photo.category}</Text>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{paddingBottom:20}}>
                         {

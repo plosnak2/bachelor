@@ -46,7 +46,7 @@ export default function App() {
         <Stack.Screen name="HomeTrainer" component={HomeTrainer} options={{
           title: 'Moji športovci',
           headerStyle: {
-           backgroundColor: '#c4c4c4'
+           backgroundColor: '#3ca0e7'
          },
          headerTitleAlign: 'center',
        }}/>
@@ -65,7 +65,7 @@ export default function App() {
         <Stack.Screen name="ChatTrainer" component={ChatTrainer} options={({ route, navigation }) => ({ 
           title: route.params.name,
           headerStyle: {
-           backgroundColor: '#c4c4c4'
+           backgroundColor: '#3ca0e7'
          },
          headerTitleAlign: 'center',
          headerRight: () => 
@@ -77,7 +77,7 @@ export default function App() {
         <Stack.Screen name="PredefinedTrainer" component={PredefinedTrainer} options={({navigation})=> ({
           title: 'Preddefinované správy',
           headerStyle: {
-           backgroundColor: '#c4c4c4'
+           backgroundColor: '#3ca0e7'
          },
          headerTitleAlign: 'center',
          headerRight: () => 
@@ -88,7 +88,7 @@ export default function App() {
         <Stack.Screen name="AddPredefined" component={AddPredefined} options={{
           title: 'Uložiť novú rýchlu odpoveď',
           headerStyle: {
-           backgroundColor: '#c4c4c4'
+           backgroundColor: '#3ca0e7'
          },
          headerTitleAlign: 'center',
         }}/>
@@ -109,7 +109,7 @@ export default function App() {
       <Stack.Screen name="GaleryTrainer" component={GaleryTrainer} options={{
         title: 'Galéria',
         headerStyle: {
-        backgroundColor: '#c4c4c4'
+        backgroundColor: '#3ca0e7'
       },
       headerTitleAlign: 'center',
     }}/>
@@ -130,14 +130,14 @@ export default function App() {
     <Stack.Screen name="CalendarTrainer" component={CalendarTrainer} options={{
       title: 'Kalendár',
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   }}/>
     <Stack.Screen name="CalendarInfoTrainer" component={CalendarInfoTrainer} options={({route}) => ({
       title: route.params.title,
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   })}/>
@@ -151,7 +151,7 @@ export default function App() {
     <Stack.Screen name="PhotoSettings" component={PhotoSettings} options={({}) => ({
       title: 'Nastavenia fotky',
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   })}/>

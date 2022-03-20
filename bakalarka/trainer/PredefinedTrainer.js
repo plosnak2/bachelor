@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     },
     button2:{
       width:"80%",
-      backgroundColor:"#c4c4c4",
+      backgroundColor:"#3ca0e7",
       height:50,
       marginTop:30,
       borderRadius:50,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     },
     button:{
       width:"20%",
-      backgroundColor:"#c4c4c4",
+      backgroundColor:"#3ca0e7",
       height:30,
       marginLeft:"5%",
       borderRadius:100,
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
       fontWeight:"bold"
     },
     box:{
-      width:"100%",
+      width:"90%",
       height:170,
       borderTopWidth:1,
       borderBottomWidth:1,
@@ -273,7 +273,11 @@ const styles = StyleSheet.create({
       flexDirection:"column",
       alignItems:"center",
       padding:8,
-      marginBottom:5
+      marginBottom:5,
+      alignSelf:"center",
+      borderWidth:1,
+      borderRadius:10,
+      borderColor:"#3ca0e7"
     },
     container: {
         flex: 1,

@@ -53,24 +53,14 @@ const HomeTrainer = ({ navigation }) => {
       return(
         <View style={{flex:1}}>
           <ScrollView  style={styles.container}>
-            <TouchableOpacity style={{alignItems:"center"}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName, message:""})}>
-              <View style={styles.column}>
-                <View style={{flexDirection:"column", alignItems:"center", width: "40%", marginTop: 10}}>
-                  <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
-                  <Text style={styles.name}>{traineeName}</Text>
-                </View>
-
-                <View style={{flexDirection:"column", alignItems:"flex-start", width: "60%", marginTop: 10, paddingRight:5}}>
-                  <Text numberOfLines={1}>{lastMessage}</Text>
-                  <Text style={{marginTop:15}}>Posledný tréning: (TODO)</Text>
-                  <View  style={{flexDirection:"row", marginTop:15}}>
-                    <Text style={{marginTop:10}}>Automatická správa</Text>
-                    <Ionicons name="settings" size={30} color="black" style={{marginLeft:20, marginTop:5}}/>
-                  </View>
-                  <Text style={{marginTop:15}}>Naplánovaná: (TODO)</Text>
-                </View>
+            <TouchableOpacity style={{width:"90%", backgroundColor:"#3ca0e7", alignSelf:"center", marginTop:50, borderRadius:5, flexDirection:"row", padding:10}} onPress={() => navigation.navigate('ChatTrainer',{name: traineeName, message:""})}>
+              <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
+              <View style={{flexDirection:"column", marginLeft:20, width:"60%"}}>
+                <Text style={{fontSize:17, fontWeight:"bold", color:"black"}}>{traineeName}</Text>
+                <Text numberOfLines={2}>{lastMessage}</Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
           </ScrollView>
           <NavbarTrainer />
@@ -96,8 +86,8 @@ const styles = StyleSheet.create({
   },
 
   profilePhoto:{
-    width: 100,
-    height: 100,
+    width: 70,
+    height: 70,
     borderRadius: 100,
     
   },
