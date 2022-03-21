@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         right: 0,
         alignSelf: 'stretch',
         flex: 1,
-        backgroundColor: '#c4c4c4',
+        backgroundColor: '#3ca0e7',
         height: 70,
         flexDirection: 'row',
         justifyContent: 'space-between',

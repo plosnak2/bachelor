@@ -133,12 +133,12 @@ const SendPhoto = ({ navigation, route }) => {
             </View>
         }
         
-        <View style={{borderBottomWidth:1, marginTop:20}}></View>
+        <View style={{borderBottomWidth:1, marginTop:20, borderBottomColor:"#3ca0e7"}}></View>
             {showSpinner && <OverlaySpinner />}
             <View style={styles.image}>
                 {imageUri && <Image source={{ uri: imageUri }} style={{ width: "100%", height: "100%", resizeMode:"contain" }} />}
             </View>
-            <View style={{borderBottomWidth:1, marginTop:20}}></View>
+            <View style={{borderBottomWidth:1, marginTop:20, borderBottomColor:"#3ca0e7"}}></View>
             
             
             <TouchableOpacity style={styles.button} onPress={uploadImageToBucket}>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         width:"80%",
         alignItems:"center",
         marginLeft:"10%",
-        backgroundColor: "#c4c4c4",
+        backgroundColor: "#3ca0e7",
         marginTop:20,
         height:50,
         justifyContent:"center",

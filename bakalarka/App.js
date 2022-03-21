@@ -37,9 +37,9 @@ export default function App() {
         />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/>
         <Stack.Screen name="HomeTrainee" component={HomeTrainee} options={{
-           title: 'Chat',
+           title: 'Váš tréner',
            headerStyle: {
-            backgroundColor: '#c4c4c4'
+            backgroundColor: '#3ca0e7'
           },
           headerTitleAlign: 'center',
         }}/>
@@ -53,7 +53,7 @@ export default function App() {
        <Stack.Screen name="ChatTrainee" component={ChatTrainee} options={({ route, navigation }) => ({ 
          title: route.params.name,
          headerStyle: {
-          backgroundColor: '#c4c4c4'
+          backgroundColor: '#3ca0e7'
         },
         headerTitleAlign: 'center',
         headerRight: () => 
@@ -95,14 +95,14 @@ export default function App() {
         <Stack.Screen name="SendPhoto" component={SendPhoto} options={{
           title: 'Odoslať fotku',
           headerStyle: {
-           backgroundColor: '#c4c4c4'
+           backgroundColor: '#3ca0e7'
          },
          headerTitleAlign: 'center',
        }}/>
        <Stack.Screen name="GaleryTrainee" component={GaleryTrainee} options={{
           title: 'Galéria',
           headerStyle: {
-          backgroundColor: '#c4c4c4'
+          backgroundColor: '#3ca0e7'
         },
         headerTitleAlign: 'center',
       }}/>
@@ -116,14 +116,14 @@ export default function App() {
     <Stack.Screen name="CalendarTrainee" component={CalendarTrainee} options={{
       title: 'Kalendár',
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   }}/>
     <Stack.Screen name="CalendarInfoTrainee" component={CalendarInfoTrainee} options={({route}) => ({
       title: route.params.title,
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   })}/>
@@ -144,7 +144,7 @@ export default function App() {
     <Stack.Screen name="CalendarAddTrainee" component={CalendarAddTrainee} options={({}) => ({
       title: 'Pridať tréning',
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   })}/>
@@ -159,7 +159,7 @@ export default function App() {
     <Stack.Screen name="EditedImagesTrainee" component={EditedImagesTrainee} options={({}) => ({
       title: 'Upravené fotky',
       headerStyle: {
-      backgroundColor: '#c4c4c4'
+      backgroundColor: '#3ca0e7'
     },
     headerTitleAlign: 'center',
   })}/>

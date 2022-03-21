@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     panel:{
         width:"100%",
         height:40,
-        backgroundColor:"#c4c4c4",
+        backgroundColor:"#3ca0e7",
         borderTopWidth:1,
         flexDirection:"row",
         marginBottom:50,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
 
     traineePhoto:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"#3ca0e7",
         padding:10,
         alignSelf : 'flex-end',
         marginRight:5,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
 
     trainee:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"#3ca0e7",
         padding:15,
         alignSelf : 'flex-end',
         marginRight:5,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
 
     trainerPhoto:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"#3ca0e7",
         padding:10,
         alignSelf : 'flex-start',
         marginLeft:5,
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
 
     trainer:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"#3ca0e7",
         padding:15,
         alignSelf : 'flex-start',
         marginLeft:5,

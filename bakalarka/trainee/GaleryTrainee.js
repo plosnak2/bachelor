@@ -45,7 +45,7 @@ const GaleryTrainee = ({ navigation }) => {
         <View style={{flex:1}}>
                 <ScrollView style={styles.container}>
                     <Text style={{fontSize:17, fontWeight:"bold"}}>Všetky fotky</Text>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20}}>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, borderBottomColor:"#3ca0e7"}}>
                         {
                             photos.map(photo => {
                                 return(
@@ -60,7 +60,7 @@ const GaleryTrainee = ({ navigation }) => {
                                 return(
                                     <View>
                                         <Text style={{fontSize:17, fontWeight:"bold", marginTop:10}}>{key}</Text>
-                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20}}>
+                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, borderBottomColor:"#3ca0e7"}}>
                                         {
                                             value.map((url, index) => {
                                                 if(url.commented == true){

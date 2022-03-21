@@ -36,7 +36,7 @@ const EditedImagesTrainee = ({ navigation, route }) => {
                         </View>
                         <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
                         
-                        <View style={{borderWidth:1, marginTop:15}}></View>
+                        <View style={{borderWidth:1, marginTop:15, borderColor:"#3ca0e7"}}></View>
                     
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Editované fotky:</Text>
                         
@@ -50,16 +50,16 @@ const EditedImagesTrainee = ({ navigation, route }) => {
                             <Text style={{fontSize:18, marginTop:15}}>Tréner zatiaľ fotku neupravoval</Text>
                         }
 
-                        <View style={{borderWidth:1, marginTop:15}}></View>
+                        <View style={{borderWidth:1, marginTop:15, borderColor:"#3ca0e7"}}></View>
 
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Trénerov komentár:</Text>
                         {
                             photo.comment.length != 0 ?
-                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#3ca0e7", padding:20, borderRadius:20}}>
                                 <Text>{photo.comment}</Text>
                             </View> :
 
-                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#c4c4c4", padding:20, borderRadius:20}}>
+                            <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#3ca0e7", padding:20, borderRadius:20}}>
                                 <Text>Tréner zatiaľ nepridal žiadny komentár k tejto fotke.</Text>
                             </View>
                         }

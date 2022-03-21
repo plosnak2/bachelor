@@ -129,7 +129,7 @@ const CalendarTrainee = ({ navigation }) => {
                 }}
                 />
                 <View style={{padding:"5%", flexDirection:"row", paddingBottom:50}}>
-                    <View style={{width:"100%", backgroundColor:"#c4c4c4", flexDirection:"column", borderRadius:10, alignItems:"center"}}>
+                    <View style={{width:"100%", backgroundColor:"#3ca0e7", flexDirection:"column", borderRadius:10, alignItems:"center"}}>
                         {(() => {
                             if(month == 1){
                                 return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Januári</Text>)
@@ -194,7 +194,7 @@ const CalendarTrainee = ({ navigation }) => {
                 navigation.navigate('CalendarAddTrainee')
               }>
                 <View >
-                    <Ionicons name="add-circle" size={70} color="#73fae1" />
+                    <Ionicons name="add-circle" size={70} color="red" />
                 </View>
             </TouchableOpacity>
         </View>
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
         left: "10%",
         top: "10%",
         height:"50%",
-        backgroundColor: "#c4c4c4",
+        backgroundColor: "#3ca0e7",
         width:"80%",
         paddingBottom:50,
         borderRadius:10
