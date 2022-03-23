@@ -94,9 +94,9 @@ const CalendarAddTrainee = ({ navigation, route }) => {
         <View style={{flex:1}}>
             <ScrollView style={styles.container}>
                 
-                <TouchableOpacity style={{width:"60%", backgroundColor:"#3ca0e7", height:80, alignSelf:"center", marginTop:30, justifyContent:"center", alignItems:"center", borderRadius:50}} onPress={showDatepicker}>
-                    <Text style={{fontWeight:"bold", fontSize:15}}>Vyberte dátum tréningu</Text>
-                    <Text style={{marginTop:5}}>{Moment(date).format('DD.MM.YYYY')}</Text>
+                <TouchableOpacity style={{width:"60%", backgroundColor:"#00a9e0", height:80, alignSelf:"center", marginTop:30, justifyContent:"center", alignItems:"center", borderRadius:50}} onPress={showDatepicker}>
+                    <Text style={{fontWeight:"bold", fontSize:15, color:"white"}}>Vyberte dátum tréningu</Text>
+                    <Text style={{marginTop:5, color:"white"}}>{Moment(date).format('DD.MM.YYYY')}</Text>
                 </TouchableOpacity>
 
                 {show && (
@@ -110,15 +110,15 @@ const CalendarAddTrainee = ({ navigation, route }) => {
                     />
                 )}
                 
-                <View style={{borderBottomWidth:1, marginTop:25, borderBottomColor:"#3ca0e7"}}></View>
+                <View style={{borderBottomWidth:1, marginTop:25, borderBottomColor:"#00a9e0"}}></View>
                 
                 <Text style={{fontSize:18, fontWeight:"bold", textAlign:"center", marginTop:30}}>Zadajte dĺžku trvania tréningu v min</Text>
                 <View style={{alignItems:"center", marginTop:10}}>
-                    <NumericInput onChange={value => setMin(value)} value={min} totalWidth={120} rounded rightButtonBackgroundColor='#3ca0e7'
-                    leftButtonBackgroundColor='#3ca0e7' minValue={0}/>
+                    <NumericInput onChange={value => setMin(value)} value={min} totalWidth={120} rounded rightButtonBackgroundColor='#00a9e0'
+                    leftButtonBackgroundColor='#00a9e0' minValue={0}/>
                 </View>
 
-                <View style={{borderBottomWidth:1, marginTop:25, borderBottomColor:"#3ca0e7"}}></View>
+                <View style={{borderBottomWidth:1, marginTop:25, borderBottomColor:"#00a9e0"}}></View>
                 <Text style={{fontSize:18, fontWeight:"bold", textAlign:"center", marginTop:30}}>Zadajte typ tréningu</Text>
                 <DropDownPicker
                     style={{width:"80%", alignSelf:"center", position:"relative", zIndex:999, marginTop:15}}
@@ -140,12 +140,12 @@ const CalendarAddTrainee = ({ navigation, route }) => {
                         <TextInput style={styles.input} placeholder="Zadajte názov nového cviku" onChangeText={newText => setName(newText)} value={name}/>
                     </View>
                 }
-                <View style={{borderBottomWidth:1, marginTop:25, borderBottomColor:"#3ca0e7"}}></View>
+                <View style={{borderBottomWidth:1, marginTop:25, borderBottomColor:"#00a9e0"}}></View>
                 <Text style={{fontWeight:"bold", fontSize:18, marginTop:25, textAlign:"center"}}>Aké máte pocity po tréningu:</Text>
                 <TextInput  multiline style={styles.input2} onChangeText={newText => setMessage(newText)} value={message}/>
 
                 <TouchableOpacity style={styles.button2} onPress={() => saveTraining()}>
-                    <Text style={{fontSize:20, fontWeight:"500"}}>Uložiť</Text>
+                    <Text style={{fontSize:20, fontWeight:"500", color:"white"}}>Uložiť</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
@@ -187,10 +187,10 @@ const styles = StyleSheet.create({
     },
     button2:{
         width:"80%",
-        backgroundColor:"#3ca0e7",
+        backgroundColor:"#00a9e0",
         height:50,
         marginTop:30,
-        borderRadius:50,
+        borderRadius:10,
         justifyContent:"center",
         alignItems:"center",
         alignSelf:"center",

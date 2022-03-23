@@ -133,7 +133,7 @@ const SendPhoto = ({ navigation, route }) => {
             </View>
         }
         
-        <View style={{borderBottomWidth:1, marginTop:20, borderBottomColor:"#3ca0e7"}}></View>
+        <View style={{borderBottomWidth:1, marginTop:20, borderBottomColor:"#00a9e0"}}></View>
             {showSpinner && <OverlaySpinner />}
             <View style={styles.image}>
                 {imageUri && <Image source={{ uri: imageUri }} style={{ width: "100%", height: "100%", resizeMode:"contain" }} />}
@@ -142,7 +142,7 @@ const SendPhoto = ({ navigation, route }) => {
             
             
             <TouchableOpacity style={styles.button} onPress={uploadImageToBucket}>
-                <Text style={{fontWeight:"bold", fontSize:20}}>Odoslať fotku</Text>
+                <Text style={{fontWeight:"bold", fontSize:20, color:"white"}}>Odoslať fotku</Text>
             </TouchableOpacity>
         </ScrollView>
     </View>
@@ -175,11 +175,11 @@ const styles = StyleSheet.create({
         width:"80%",
         alignItems:"center",
         marginLeft:"10%",
-        backgroundColor: "#3ca0e7",
+        backgroundColor: "#00a9e0",
         marginTop:20,
         height:50,
         justifyContent:"center",
-        borderRadius:100,
+        borderRadius:10,
         marginBottom:50
     }
 })

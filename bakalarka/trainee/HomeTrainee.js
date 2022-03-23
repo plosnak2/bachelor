@@ -64,11 +64,11 @@ const HomeTrainee = ({ navigation }) => {
                 <ScrollView style={styles.container}>
                     
 
-                    <TouchableOpacity style={{width:"90%", backgroundColor:"#3ca0e7", alignSelf:"center", marginTop:50, borderRadius:5, flexDirection:"row", padding:10}} onPress={() => navigation.navigate('ChatTrainee',{name: coachName})}>
+                    <TouchableOpacity style={{width:"90%", backgroundColor:"#00a9e0", alignSelf:"center", marginTop:50, borderRadius:5, flexDirection:"row", padding:10}} onPress={() => navigation.navigate('ChatTrainee',{name: coachName})}>
                         <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
                         <View style={{flexDirection:"column", marginLeft:20, width:"60%"}}>
-                            <Text style={{fontSize:17, fontWeight:"bold", color:"black"}}>{coachName}</Text>
-                            <Text numberOfLines={2}>{lastMessage}</Text>
+                            <Text style={{fontSize:17, fontWeight:"bold", color:"white"}}>{coachName}</Text>
+                            <Text style={{color:"white"}} numberOfLines={2}>{lastMessage}</Text>
                         </View>
                     </TouchableOpacity>
 

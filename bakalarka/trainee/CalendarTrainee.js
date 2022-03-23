@@ -91,9 +91,9 @@ const CalendarTrainee = ({ navigation }) => {
             {showView && 
                 <ScrollView style={styles.spinnerView}>
                     <View style={{alignItems:"center"}}>
-                    <Text style={{marginTop:15, fontWeight:"bold", fontSize:20}}>{Moment(date).format('DD.MM.YYYY')}</Text>
+                    <Text style={{marginTop:15, fontWeight:"bold", fontSize:20, color:"white"}}>{Moment(date).format('DD.MM.YYYY')}</Text>
                     <TouchableOpacity style={styles.icon} onPress={() => setShowView(false)}> 
-                        <Ionicons name="close-circle-outline" size={40} color="black"/>
+                        <Ionicons name="close-circle-outline" size={40} color="white"/>
                     </TouchableOpacity>
                     {
                         markedEvents[date].dots.map(exercise => {
@@ -129,32 +129,32 @@ const CalendarTrainee = ({ navigation }) => {
                 }}
                 />
                 <View style={{padding:"5%", flexDirection:"row", paddingBottom:50}}>
-                    <View style={{width:"100%", backgroundColor:"#3ca0e7", flexDirection:"column", borderRadius:10, alignItems:"center"}}>
+                    <View style={{width:"100%", backgroundColor:"#00a9e0", flexDirection:"column", borderRadius:10, alignItems:"center"}}>
                         {(() => {
                             if(month == 1){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Januári</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Januári</Text>)
                             } else if(month == 2){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy vo Februári</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy vo Februári</Text>)
                             } else if(month == 3){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Marci</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Marci</Text>)
                             } else if(month == 4){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Apríli</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Apríli</Text>)
                             } else if(month == 5){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Máji</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Máji</Text>)
                             } else if(month == 6){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Júni</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Júni</Text>)
                             } else if(month == 7){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Júli</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Júli</Text>)
                             } else if(month == 8){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Auguste</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Auguste</Text>)
                             } else if(month == 9){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Septembri</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Septembri</Text>)
                             } else if(month == 10){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Októbri</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Októbri</Text>)
                             } else if(month == 11){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Novembri</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Novembri</Text>)
                             } else if(month == 12){
-                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%"}}>Tréningy v Decembri</Text>)
+                                return(<Text style={{fontSize:20, fontWeight:"bold", textAlign:"center", width:"90%", color:"white"}}>Tréningy v Decembri</Text>)
                             }
                         })()}
                         {
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
         left: "10%",
         top: "10%",
         height:"50%",
-        backgroundColor: "#3ca0e7",
+        backgroundColor: "#00a9e0",
         width:"80%",
         paddingBottom:50,
         borderRadius:10

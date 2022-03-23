@@ -214,8 +214,8 @@ const ChatTrainee = ({ navigation }) => {
             </View>
             <View>
                 <TextInput style={styles.input} placeholder="Napíšte správu" onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})} onChangeText={newText => setMessage(newText)} value={message} multiline/>
-                <TouchableOpacity style={{position:"absolute", bottom:10, right:15}} onPress={sendMessage}>
-                    <Ionicons name='send' size={30} />
+                <TouchableOpacity style={{position:"absolute", bottom:10, right:"7%"}} onPress={sendMessage}>
+                    <Ionicons name='send' size={30} color="#00a9e0"/>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     panel:{
         width:"100%",
         height:40,
-        backgroundColor:"#3ca0e7",
+        backgroundColor:"#00a9e0",
         borderTopWidth:1,
         flexDirection:"row",
         marginBottom:50,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
 
     traineePhoto:{
         maxWidth:"60%",
-        backgroundColor:"#3ca0e7",
+        backgroundColor:"#00a9e0",
         padding:10,
         alignSelf : 'flex-end',
         marginRight:5,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
 
     trainee:{
         maxWidth:"60%",
-        backgroundColor:"#3ca0e7",
+        backgroundColor:"#00a9e0",
         padding:15,
         alignSelf : 'flex-end',
         marginRight:5,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
 
     trainerPhoto:{
         maxWidth:"60%",
-        backgroundColor:"#3ca0e7",
+        backgroundColor:"lightgrey",
         padding:10,
         alignSelf : 'flex-start',
         marginLeft:5,
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
 
     trainer:{
         maxWidth:"60%",
-        backgroundColor:"#3ca0e7",
+        backgroundColor:"lightgrey",
         padding:15,
         alignSelf : 'flex-start',
         marginLeft:5,
@@ -305,12 +305,19 @@ const styles = StyleSheet.create({
     input:{
         position:"absolute",
         bottom:0,
-        width:"100%",
+        width:"90%",
         backgroundColor:"white",
-        height:50,
+        height: 48,
         borderTopWidth:1,
         paddingLeft:15,
-        paddingRight:50
+        paddingRight:50,
+        borderWidth:1,
+        alignSelf:"center",
+        borderColor:"#00a9e0",
+        borderRadius:100,
+        paddingTop:5,
+        paddingBottom:5,
+        marginBottom:1
     },
     container: {
         flex: 1,
