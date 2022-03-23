@@ -77,7 +77,7 @@ const GaleryTrainer = ({ navigation }) => {
                 {showSpinner && <OverlaySpinner />}
                 <ScrollView style={styles.container}>
                     <Text style={{fontSize:17, fontWeight:"bold"}}>Všetky fotky</Text>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, borderBottomColor:"#3ca0e7"}}>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, borderBottomColor:"#00a9e0"}}>
                         {
                             photos.map(photo => {
                                 return(
@@ -97,7 +97,7 @@ const GaleryTrainer = ({ navigation }) => {
                                                 <Ionicons name='pencil' size={30} style={{marginLeft: 10}}/>
                                             </TouchableOpacity>
                                         </View>
-                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, marginTop:15, borderBottomColor:"#3ca0e7"}}>
+                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, marginTop:15, borderBottomColor:"#00a9e0"}}>
                                         {
                                             value.map(url => {
                                                 return(
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         left: "10%",
         top: "20%",
         alignItems: "center",
-        backgroundColor: "#3ca0e7",
+        backgroundColor: "#00a9e0",
         width:"80%",
         height:200
     },

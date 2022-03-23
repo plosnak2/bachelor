@@ -171,10 +171,10 @@ const PredefinedTrainer = ({ navigation }) => {
             <Text style={{fontWeight:"bold", fontSize:20}}>Upraviť správu:</Text>
             <TextInput onChangeText={newText => setEditingMessage(newText)} value={editingMessage} multiline style={styles.input}/>
             <TouchableOpacity style={styles.button2} onPress={() => editMessage()}>
-              <Text style={{fontSize:20, fontWeight:"500"}}>Uložiť</Text>
+              <Text style={{fontSize:20, fontWeight:"500", color:"white"}}>Uložiť</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button2} onPress={() => setEditing(false)}>
-              <Text style={{fontSize:20, fontWeight:"500"}}>Naspäť</Text>
+              <Text style={{fontSize:20, fontWeight:"500", color:"white"}}>Naspäť</Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
@@ -199,11 +199,12 @@ const PredefinedTrainer = ({ navigation }) => {
                 <Text style={styles.message} numberOfLines={2}>{message.message}</Text>
                 <View style={styles.bottom}>
                   <Text style={styles.usage}>Počet použití: {message.usage}</Text>
-                  <TouchableOpacity style={styles.button} onPress={() => sendingMode(message, ids[index])}>
-                    <Text>Poslať</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.button} onPress={() => editingMode(message, ids[index])}>
+                  
+                  <TouchableOpacity style={styles.button3} onPress={() => editingMode(message, ids[index])}>
                     <Text>Upraviť</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.button} onPress={() => sendingMode(message, ids[index])}>
+                    <Text style={{color:"white"}}>Poslať</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -226,10 +227,10 @@ const styles = StyleSheet.create({
     },
     button2:{
       width:"80%",
-      backgroundColor:"#3ca0e7",
+      backgroundColor:"#00a9e0",
       height:50,
       marginTop:30,
-      borderRadius:50,
+      borderRadius:10,
       justifyContent:"center",
       alignItems:"center"
     },  
@@ -237,16 +238,28 @@ const styles = StyleSheet.create({
       width:"80%",
       borderWidth:1,
       padding:10,
-      marginTop:10
+      marginTop:10,
+      borderRadius:10
     },
     button:{
       width:"20%",
-      backgroundColor:"#3ca0e7",
+      backgroundColor:"#00a9e0",
       height:30,
       marginLeft:"5%",
-      borderRadius:100,
+      borderRadius:10,
       alignItems:"center",
       justifyContent:"center"
+    },
+    button3:{
+      width:"20%",
+      backgroundColor:"white",
+      height:30,
+      marginLeft:"5%",
+      borderRadius:10,
+      alignItems:"center",
+      justifyContent:"center",
+      borderColor:"#00a9e0",
+      borderWidth:1
     },
     usage:{
       fontSize:18,
@@ -269,15 +282,15 @@ const styles = StyleSheet.create({
       height:170,
       borderTopWidth:1,
       borderBottomWidth:1,
-      marginTop:15,
+      marginTop:2,
       flexDirection:"column",
       alignItems:"center",
       padding:8,
-      marginBottom:5,
+      marginBottom:2,
       alignSelf:"center",
       borderWidth:1,
       borderRadius:10,
-      borderColor:"#3ca0e7"
+      borderColor:"#00a9e0"
     },
     container: {
         flex: 1,

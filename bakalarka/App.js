@@ -46,9 +46,10 @@ export default function App() {
         <Stack.Screen name="HomeTrainer" component={HomeTrainer} options={{
           title: 'Moji športovci',
           headerStyle: {
-           backgroundColor: '#3ca0e7'
+           backgroundColor: '#00a9e0',
          },
          headerTitleAlign: 'center',
+         headerTintColor:"white"
        }}/>
        <Stack.Screen name="ChatTrainee" component={ChatTrainee} options={({ route, navigation }) => ({ 
          title: route.params.name,
@@ -65,31 +66,34 @@ export default function App() {
         <Stack.Screen name="ChatTrainer" component={ChatTrainer} options={({ route, navigation }) => ({ 
           title: route.params.name,
           headerStyle: {
-           backgroundColor: '#3ca0e7'
+           backgroundColor: '#00a9e0',
          },
          headerTitleAlign: 'center',
+         headerTintColor:"white",
          headerRight: () => 
          <View style={{flexDirection: 'row', paddingRight:0}}>
-            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('CalendarTrainer')}/>
-            <Ionicons name='images-outline' size={35} style={{marginLeft: 15}} onPress={() => navigation.navigate('GaleryTrainer')}/>
+            <Ionicons name='calendar-outline' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('CalendarTrainer')} color="white"/>
+            <Ionicons name='images-outline' size={35} style={{marginLeft: 15}} onPress={() => navigation.navigate('GaleryTrainer')} color="white"/>
          </View>
         })}/>
         <Stack.Screen name="PredefinedTrainer" component={PredefinedTrainer} options={({navigation})=> ({
           title: 'Preddefinované správy',
           headerStyle: {
-           backgroundColor: '#3ca0e7'
+           backgroundColor: '#00a9e0'
          },
+         headerTintColor:"white",
          headerTitleAlign: 'center',
          headerRight: () => 
          <View style={{flexDirection: 'row', paddingRight:0}}>
-            <Ionicons name='add' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('AddPredefined', {message: ''})}/>
+            <Ionicons name='add' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('AddPredefined', {message: ''})} color="white"/>
          </View>
         })}/>
         <Stack.Screen name="AddPredefined" component={AddPredefined} options={{
           title: 'Uložiť novú rýchlu odpoveď',
           headerStyle: {
-           backgroundColor: '#3ca0e7'
+           backgroundColor: '#00a9e0'
          },
+         headerTintColor:"white",
          headerTitleAlign: 'center',
         }}/>
         <Stack.Screen name="SendPhoto" component={SendPhoto} options={{
@@ -109,8 +113,9 @@ export default function App() {
       <Stack.Screen name="GaleryTrainer" component={GaleryTrainer} options={{
         title: 'Galéria',
         headerStyle: {
-        backgroundColor: '#3ca0e7'
+        backgroundColor: '#00a9e0'
       },
+      headerTintColor:"white",
       headerTitleAlign: 'center',
     }}/>
     <Stack.Screen name="CalendarTrainee" component={CalendarTrainee} options={{
@@ -130,15 +135,17 @@ export default function App() {
     <Stack.Screen name="CalendarTrainer" component={CalendarTrainer} options={{
       title: 'Kalendár',
       headerStyle: {
-      backgroundColor: '#3ca0e7'
+      backgroundColor: '#00a9e0'
     },
+    headerTintColor:"white",
     headerTitleAlign: 'center',
   }}/>
     <Stack.Screen name="CalendarInfoTrainer" component={CalendarInfoTrainer} options={({route}) => ({
       title: route.params.title,
       headerStyle: {
-      backgroundColor: '#3ca0e7'
+      backgroundColor: '#00a9e0'
     },
+    headerTintColor:"white",
     headerTitleAlign: 'center',
   })}/>
     <Stack.Screen name="CalendarAddTrainee" component={CalendarAddTrainee} options={({}) => ({
@@ -151,8 +158,9 @@ export default function App() {
     <Stack.Screen name="PhotoSettings" component={PhotoSettings} options={({}) => ({
       title: 'Nastavenia fotky',
       headerStyle: {
-      backgroundColor: '#3ca0e7'
+      backgroundColor: '#00a9e0'
     },
+    headerTintColor:"white",
     headerTitleAlign: 'center',
   })}/>
     <Stack.Screen name="DrawTrainer" component={DrawTrainer} options={{ headerShown: false }}/>

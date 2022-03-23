@@ -38,8 +38,8 @@ const CalendarInfoTrainer = ({ navigation, route }) => {
                     </View>
                     <View style={{borderBottomWidth:1, marginTop:15, borderBottomColor:"#3ca0e7"}}></View>
                     <Text style={{fontSize:20, fontWeight:"bold", marginTop:15, marginLeft:30}}>Popis:</Text>
-                    <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#3ca0e7", padding:20, borderRadius:20}}>
-                        <Text>{training.description}</Text>
+                    <View style={{marginTop:15, marginLeft:30, marginRight:30, backgroundColor:"#00a9e0", padding:20, borderRadius:20}}>
+                        <Text style={{color:"white"}}>{training.description}</Text>
                     </View>
                 </ScrollView>
             </View>

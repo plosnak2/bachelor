@@ -11,21 +11,21 @@ const NavbarTrainer = () => {
         <View style={styles.navbar}>
             <TouchableOpacity onPress={() => navigation.navigate('HomeTrainer')}>
             <View style={styles.item1}>
-                <Ionicons name="chatbox-ellipses-outline" size={40} color="black" />
+                <Ionicons name="chatbox-ellipses-outline" size={40} color="white" />
                 <Text style={styles.text}>Chat</Text>
             </View>
             </TouchableOpacity>
             
             <TouchableOpacity onPress={() => navigation.navigate('PredefinedTrainer')}>
             <View style={styles.item2}>
-                <Ionicons name="chatbubble-outline" size={40} color="black" />
+                <Ionicons name="chatbubble-outline" size={40} color="white" />
                 <Text style={styles.text}>Uložené odpovede</Text>
             </View>
             </TouchableOpacity>
 
             <TouchableOpacity>
             <View style={styles.item3}>
-                <Ionicons name="person-outline" size={40} color="black" />
+                <Ionicons name="person-outline" size={40} color="white" />
                 <Text style={styles.text}>Profil</Text>
             </View>
             </TouchableOpacity>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         right: 0,
         alignSelf: 'stretch',
         flex: 1,
-        backgroundColor: '#3ca0e7',
+        backgroundColor: '#00a9e0',
         height: 70,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
     text:{
         fontSize:15,
         fontWeight: 'bold',
-        color: 'black'
+        color: 'white'
     }
 })
