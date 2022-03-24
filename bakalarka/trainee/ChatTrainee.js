@@ -58,16 +58,21 @@ const ChatTrainee = ({ navigation }) => {
     };
 
     function sendMessage(){
-       ChatRef.add({
-            date: new Date(),
-            from: email,
-            isPhoto: false,
-            message: message
-        })
-        .then((docRef) => {
-            setMessage('');
-            
-        })
+        if(message === ""){
+
+        } else {
+            ChatRef.add({
+                date: new Date(),
+                from: email,
+                isPhoto: false,
+                message: message
+            })
+            .then((docRef) => {
+                setMessage('');
+                
+            })
+        }
+       
     }
 
     if(!loaded){
@@ -93,7 +98,7 @@ const ChatTrainee = ({ navigation }) => {
                                         <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.traineePhoto}>
-                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold", color:"white"}}>Kategória: {message.category}</Text>
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                             </View>
                                         </View>
@@ -120,7 +125,7 @@ const ChatTrainee = ({ navigation }) => {
                                         <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainee}>
-                                                <Text>{message.message}</Text>
+                                                <Text style={{color:"white"}}>{message.message}</Text>
                                             </View>
                                         </View>
                                         {(() => {
@@ -150,7 +155,7 @@ const ChatTrainee = ({ navigation }) => {
                                         <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainerPhoto}>
-                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold", color:"white"}}>Kategória: {message.category}</Text>
                                                 <TouchableOpacity onPress={() => navigation.navigate('EditedImagesTrainee', {docId: message.photo})}>
                                                     <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                                 </TouchableOpacity>
@@ -179,7 +184,7 @@ const ChatTrainee = ({ navigation }) => {
                                         <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainer}>
-                                                <Text>{message.message}</Text>
+                                                <Text style={{color:"white"}}>{message.message}</Text>
                                             </View>
                                         </View>
                                         {(() => {
@@ -284,7 +289,7 @@ const styles = StyleSheet.create({
 
     trainerPhoto:{
         maxWidth:"60%",
-        backgroundColor:"lightgrey",
+        backgroundColor:"grey",
         padding:10,
         alignSelf : 'flex-start',
         marginLeft:5,
@@ -294,7 +299,7 @@ const styles = StyleSheet.create({
 
     trainer:{
         maxWidth:"60%",
-        backgroundColor:"lightgrey",
+        backgroundColor:"grey",
         padding:15,
         alignSelf : 'flex-start',
         marginLeft:5,
