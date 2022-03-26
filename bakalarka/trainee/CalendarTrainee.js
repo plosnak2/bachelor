@@ -224,12 +224,12 @@ const styles = StyleSheet.create({
     spinnerView: {
         position: "absolute",
         zIndex: 1,
-        left: "10%",
-        top: "10%",
-        height:"50%",
+        left: 0,
+        top: 0,
+        height:"100%",
         backgroundColor: "#00a9e0",
-        width:"80%",
+        width:"100%",
         paddingBottom:50,
-        borderRadius:10
+        
     },
 })
