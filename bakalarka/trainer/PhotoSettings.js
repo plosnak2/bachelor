@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, TextInput, Keyboard, KeyboardAvoidingView, Alert, ActivityIndicator, Dimensions } from "react-native";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import NavbarTrainer from "./Navbar";
 import { PredefinedRef } from "../firebasecfg";
 import { PhotosRef } from "../firebasecfg";
@@ -15,7 +15,21 @@ const PhotoSettings = ({ navigation, route }) => {
     const [actualId, setActualId] = useState(route.params.photo)
     const [docIds, setDocIds] = useState([])
     const [showView, setShowView] = useState(false)
-    const [comment, setComment] = useState('')
+    const [comment, _setComment] = useState('')
+    const edited = Boolean(showView);
+    const textRef = useRef(comment);
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setComment = newText => {
+        textRef.current = newText;
+        _setComment(newText);
+    };
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
 
     useEffect(async () => {
         const docpic = await PhotosRef.doc(actualId).get();
@@ -34,7 +48,36 @@ const PhotoSettings = ({ navigation, route }) => {
         setOtherPhotos(pics)
         setDocIds(ids)
         setComment(docpic.data().comment)
-        console.log(actualId)
+        
+        navigation.addListener('beforeRemove', (e) => {
+            if (textRef.current == docpic.data().comment) {
+              // If we don't have unsaved changes, then we don't need to do anything
+              return;
+            }
+            
+            if(fromHereRef.current == "a"){
+                return;
+            }
+            // Prevent default behavior of leaving the screen
+            e.preventDefault();
+    
+            // Prompt the user before leaving the screen
+            Alert.alert(
+              'Vymazať zmeny?',
+              'Prajete si vážne opustiť túto obrazovku?',
+              [
+                { text: "Zostať", style: 'cancel', onPress: () => {} },
+                {
+                  text: 'Opustiť',
+                  style: 'destructive',
+                  // If the user confirmed, then we dispatch the action we blocked earlier
+                  // This will continue the action that had triggered the removal of the screen
+                  onPress: () => navigation.dispatch(e.data.action),
+                },
+              ]
+            );
+        })
+
     }, [actualId])
 
     async function sendComment() {
@@ -62,6 +105,8 @@ const PhotoSettings = ({ navigation, route }) => {
                 isPhoto: false,
                 message: "Tréner komentoval fotku: " + comment
             })
+            setFromHere("a")
+            navigation.goBack();
         }
     }
 
@@ -131,7 +176,11 @@ const PhotoSettings = ({ navigation, route }) => {
                         {
                             showView && 
                             <TouchableOpacity onPress={() => {setShowView(false); sendComment()}} style={{width:"40%", backgroundColor:"#00a9e0", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"30%", marginTop:10}}>
-                                <Text style={{color:"white"}}>Odoslať</Text>
+                                <Text style={{color:"white"}}>
+                                {
+                                    comment == photo.comment ? 'Zrušiť' : "Odoslať"
+                                }
+                                </Text>
                             </TouchableOpacity>
                         }
 

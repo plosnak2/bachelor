@@ -7,6 +7,38 @@ import { PredefinedRef } from "../firebasecfg";
 const AddPredefined = ({ navigation, route }) => {
     const [name, setName] = useState('')
     const [message, setMessage] = useState(route.params.message)
+    const hasUnsavedChangesName = Boolean(name);
+    const hasUnsavedChangesMessage = Boolean(message);
+
+    React.useEffect(
+        () =>
+          navigation.addListener('beforeRemove', (e) => {
+            if (!hasUnsavedChangesName && !hasUnsavedChangesMessage) {
+              // If we don't have unsaved changes, then we don't need to do anything
+              return;
+            }
+    
+            // Prevent default behavior of leaving the screen
+            e.preventDefault();
+    
+            // Prompt the user before leaving the screen
+            Alert.alert(
+              'Vymazať zmeny?',
+              'Prajete si vážne opustiť túto obrazovku?',
+              [
+                { text: "Zostať", style: 'cancel', onPress: () => {} },
+                {
+                  text: 'Opustiť',
+                  style: 'destructive',
+                  // If the user confirmed, then we dispatch the action we blocked earlier
+                  // This will continue the action that had triggered the removal of the screen
+                  onPress: () => navigation.dispatch(e.data.action),
+                },
+              ]
+            );
+          }),
+        [navigation, hasUnsavedChangesName, hasUnsavedChangesMessage]
+      );
 
     function saveMessage(){
         if(name === '' || message === ''){

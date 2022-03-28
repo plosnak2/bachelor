@@ -85,6 +85,9 @@ export default function App() {
          },
          headerTintColor:"white",
          headerTitleAlign: 'center',
+         gestureEnabled: false,
+         headerShown: true,
+         headerLeft: () => <></>,
          headerRight: () => 
          <View style={{flexDirection: 'row', paddingRight:0}}>
             <Ionicons name='add' size={35} style={{marginLeft: 10}} onPress={() => navigation.navigate('AddPredefined', {message: ''})} color="white"/>
@@ -97,6 +100,9 @@ export default function App() {
          },
          headerTintColor:"white",
          headerTitleAlign: 'center',
+         gestureEnabled: false,
+         headerShown: true,
+         headerLeft: () => <></>,
         }}/>
         <Stack.Screen name="SendPhoto" component={SendPhoto} options={{
           title: 'Odoslať fotku',
@@ -105,6 +111,9 @@ export default function App() {
          },
          headerTintColor:"white",
          headerTitleAlign: 'center',
+         gestureEnabled: false,
+         headerShown: true,
+         headerLeft: () => <></>,
        }}/>
        <Stack.Screen name="GaleryTrainee" component={GaleryTrainee} options={{
           title: 'Galéria',
@@ -159,6 +168,9 @@ export default function App() {
       headerStyle: {
       backgroundColor: '#00a9e0'
     },
+    gestureEnabled: false,
+    headerShown: true,
+    headerLeft: () => <></>,
     headerTintColor:"white",
     headerTitleAlign: 'center',
   })}/>
@@ -169,6 +181,9 @@ export default function App() {
     },
     headerTintColor:"white",
     headerTitleAlign: 'center',
+    gestureEnabled: false,
+    headerShown: true,
+    headerLeft: () => <></>,
   })}/>
     <Stack.Screen name="DrawTrainer" component={DrawTrainer} options={{ headerShown: false }}/>
     <Stack.Screen name="EditedImagesTrainee" component={EditedImagesTrainee} options={({}) => ({

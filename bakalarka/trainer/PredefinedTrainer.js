@@ -102,7 +102,7 @@ const PredefinedTrainer = ({ navigation }) => {
       [
         // The "Yes" button
         {
-          text: "Yes",
+          text: "Áno",
           onPress: () => {
             PredefinedRef.doc(id).delete()
             .then(() => {
@@ -123,11 +123,33 @@ const PredefinedTrainer = ({ navigation }) => {
         // The "No" button
         // Does nothing but dismiss the dialog when tapped
         {
-          text: "No",
+          text: "Nie",
         },
       ]
     );
   };
+
+  function back(){
+    return Alert.alert(
+      "Opustiť obrazovku",
+      "Naozaj si prajete opustiť túto obrazovku?",
+      [
+        // The "Yes" button
+        {
+          text: "Áno",
+          onPress: () => {
+            setEditing(false)
+          }
+          
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "Nie",
+        },
+      ]
+    );
+  }
 
 
   if(!loaded){
@@ -173,7 +195,7 @@ const PredefinedTrainer = ({ navigation }) => {
             <TouchableOpacity style={styles.button2} onPress={() => editMessage()}>
               <Text style={{fontSize:20, fontWeight:"500", color:"white"}}>Uložiť</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button2} onPress={() => setEditing(false)}>
+            <TouchableOpacity style={styles.button2} onPress={() => back()}>
               <Text style={{fontSize:20, fontWeight:"500", color:"white"}}>Naspäť</Text>
             </TouchableOpacity>
           </View>

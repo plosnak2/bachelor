@@ -39,6 +39,26 @@ const CalendarAddTrainee = ({ navigation, route }) => {
             })
             setItems(trainings_data)  
         })
+        navigation.addListener('beforeRemove', (e) => {
+            // Prevent default behavior of leaving the screen
+            e.preventDefault();
+    
+            // Prompt the user before leaving the screen
+            Alert.alert(
+              'Vymazať zmeny?',
+              'Prajete si vážne opustiť túto obrazovku?',
+              [
+                { text: "Zostať", style: 'cancel', onPress: () => {} },
+                {
+                  text: 'Opustiť',
+                  style: 'destructive',
+                  // If the user confirmed, then we dispatch the action we blocked earlier
+                  // This will continue the action that had triggered the removal of the screen
+                  onPress: () => navigation.dispatch(e.data.action),
+                },
+              ]
+            );
+          })
       }, [])
 
     const onChange = (event, selectedDate) => {
