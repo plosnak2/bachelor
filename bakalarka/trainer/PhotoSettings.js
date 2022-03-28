@@ -133,17 +133,6 @@ const PhotoSettings = ({ navigation, route }) => {
                             
                         </View>
                         <View style={{borderWidth:1, marginTop:15, borderColor:"#00a9e0"}}></View>
-                        <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Editované fotky:</Text>
-                        {
-                            photo.edited.length != 0 ?
-                            photo.edited.map((url, index) => {
-                                return(
-                                    <Image source={{ uri: url }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain", marginTop:15}} />
-                                )
-                            }) : 
-                            <Text style={{fontSize:18, marginTop:15}}>Túto fotku ste ešte needitovali.</Text>
-                        }
-                        <View style={{borderWidth:1, marginTop:15, borderColor:"#00a9e0"}}></View>
 
                         <View style={{flexDirection:"row"}}>
                             <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Váš komentár:</Text>
@@ -183,6 +172,18 @@ const PhotoSettings = ({ navigation, route }) => {
                                 </Text>
                             </TouchableOpacity>
                         }
+                        <View style={{borderWidth:1, marginTop:15, borderColor:"#00a9e0"}}></View>
+                        <Text style={{fontSize:18, marginTop:15, fontWeight:"bold"}}>Editované fotky:</Text>
+                        {
+                            photo.edited.length != 0 ?
+                            photo.edited.map((url, index) => {
+                                return(
+                                    <Image source={{ uri: url }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain", marginTop:15}} />
+                                )
+                            }) : 
+                            <Text style={{fontSize:18, marginTop:15}}>Túto fotku ste ešte needitovali.</Text>
+                        }
+                        
 
                         <View style={{borderWidth:1, marginTop:15, borderColor:"#00a9e0"}}></View>
                         <Text style={{fontSize:18, marginTop:15, fontWeight:"bold", marginBottom:15}}>Ďalšie fotky z kategórie {photo.category}</Text>
