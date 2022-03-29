@@ -8,6 +8,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { ChatRef } from "../firebasecfg";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { Modal } from 'react-native';
+import ImageViewer from 'react-native-image-zoom-viewer';
+
 const PhotoSettings = ({ navigation, route }) => {
     const [photo, setPhoto] = useState()
     const [loading, setLoading] = useState(true)
@@ -20,6 +23,7 @@ const PhotoSettings = ({ navigation, route }) => {
     const textRef = useRef(comment);
     const [fromHere, _setFromHere] = useState('')
     const fromHereRef = useRef(fromHere);
+    const [viewImage, setViewImage] = useState(false)
 
     const setComment = newText => {
         textRef.current = newText;
@@ -50,6 +54,7 @@ const PhotoSettings = ({ navigation, route }) => {
         setComment(docpic.data().comment)
         
         navigation.addListener('beforeRemove', (e) => {
+            
             if (textRef.current == docpic.data().comment) {
               // If we don't have unsaved changes, then we don't need to do anything
               return;
@@ -60,7 +65,7 @@ const PhotoSettings = ({ navigation, route }) => {
             }
             // Prevent default behavior of leaving the screen
             e.preventDefault();
-    
+            
             // Prompt the user before leaving the screen
             Alert.alert(
               'Vymazať zmeny?',
@@ -110,6 +115,20 @@ const PhotoSettings = ({ navigation, route }) => {
         }
     }
 
+    const images = [{
+        // Simplest usage.
+        url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
+     
+        // width: number
+        // height: number
+        // Optional, if you know the image size, you can set the optimization performance
+     
+        // You can pass props to <Image />.
+        props: {
+            // headers: ...
+        }
+    }]
+
     if(loading){
         return( 
             <View style={[styles.container2, styles.horizontal]}>
@@ -119,13 +138,33 @@ const PhotoSettings = ({ navigation, route }) => {
     } else {
         return(
             <View style={{flex:1}}>
+                {
+                    viewImage && 
+                    <Modal visible={true} transparent={true} onSwipeDown={() => setViewImage(false)}>
+                        <ImageViewer imageUrls={[
+                            {
+                              url:photo.photourl,
+                            },
+                            
+                          ]}
+                          onClick={() => setViewImage(false) }
+                          renderIndicator={() => null}
+                          onCancel={() => console.log("here")}
+                          onSwipeDown={() => setViewImage(false)}
+                          enableSwipeDown
+                          />
+                          
+                    </Modal>
+                }
                 <ScrollView style={styles.container}>
                     <View style={{padding:10}}>
                         <View style={{flexDirection:"row",marginBottom:15}}>
                             <Text style={{fontSize:18}}>Kategória: {photo.category}</Text>
                             <Text style={{fontSize:18, position:"absolute", right:10}}>{Moment(new Date(photo.date.toDate())).format('DD.MM.YYYY')}</Text>
                         </View>
-                        <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
+                        <TouchableOpacity onPress={() => setViewImage(true)}>
+                            <Image source={{ uri: photo.photourl }} style={{ width: "100%", height: Dimensions.get('screen').height/1.6, resizeMode:"contain"}} />
+                        </TouchableOpacity>
                         <View style={{flexDirection:"row", marginTop:30}}> 
                             <TouchableOpacity onPress={() => navigation.navigate('DrawTrainer', {uri: photo.photourl, docId: actualId, category: photo.category})} style={{width:"40%", backgroundColor:"#00a9e0", borderRadius:10, height:50, alignItems:"center", justifyContent:"center", marginLeft:"30%"}}>
                                 <Text style={{color:"white"}}>Upraviť fotku</Text>
