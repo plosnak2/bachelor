@@ -36,21 +36,6 @@ const HomeTrainee = ({ navigation }) => {
         return unsubscribe;
     }, [navigation])
 
-    // dočasna funckia pre odhlásenie
-    const handleSignOut= () =>{
-      auth
-        .signOut()
-        .then(() => {
-            AsyncStorage.removeItem('email');
-            
-        })
-        .then(() => {
-            navigation.replace('Login')
-        
-        })
-        .catch(error => alert(error.message))
-    }
-
     // pokial niesu ziskane informácie tak vraciam loader
     if(!loaded){
         return (
@@ -71,8 +56,6 @@ const HomeTrainee = ({ navigation }) => {
                             <Text style={{color:"white"}} numberOfLines={2}>{lastMessage}</Text>
                         </View>
                     </TouchableOpacity>
-
-                    <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
                 </ScrollView>
                 <NavbarTrainee />
             </View>

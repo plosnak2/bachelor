@@ -24,6 +24,7 @@ import PhotoSettings from './trainer/PhotoSettings';
 import DrawTrainer from './trainer/DrawTrainer';
 import EditedImagesTrainee from './trainee/EditedImagesTrainee';
 import ProfileTrainer from './trainer/ProfileTrainer';
+import ProfileTrainee from './trainee/ProfileTrainee';
 
 const Stack = createNativeStackNavigator();
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
@@ -196,6 +197,15 @@ export default function App() {
     headerTitleAlign: 'center',
   })}/>
     <Stack.Screen name="ProfileTrainer" component={ProfileTrainer} options={({}) => ({
+      title: 'Profil',
+      headerStyle: {
+      backgroundColor: '#00a9e0'
+    },
+    headerShown: true,
+    headerTintColor:"white",
+    headerTitleAlign: 'center',
+  })}/>
+    <Stack.Screen name="ProfileTrainee" component={ProfileTrainee} options={({}) => ({
       title: 'Profil',
       headerStyle: {
       backgroundColor: '#00a9e0'

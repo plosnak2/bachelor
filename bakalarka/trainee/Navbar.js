@@ -33,7 +33,7 @@ const NavbarTrainee = () => {
                 </View>
                 </TouchableOpacity>
     
-                <TouchableOpacity style={{width:"33%"}}>
+                <TouchableOpacity style={{width:"33%"}} onPress={() => navigation.navigate('ProfileTrainee')}>
                 <View style={styles.item3}>
                     <Ionicons name="person-outline" size={40} color="#00a9e0" />
                     <Text style={styles.text}>Profil</Text>
@@ -62,10 +62,39 @@ const NavbarTrainee = () => {
                 </View>
                 </TouchableOpacity>
     
-                <TouchableOpacity style={{width:"33%"}}>
+                <TouchableOpacity style={{width:"33%"}} onPress={() => navigation.navigate('ProfileTrainee')}>
                 <View style={styles.item3}>
                     <Ionicons name="person-outline" size={40} color="#00a9e0" />
                     <Text style={styles.text}>Profil</Text>
+                </View>
+                </TouchableOpacity>
+            </View>
+            
+            </View>
+            
+        )
+    } else if(route.name == 'ProfileTrainee'){
+        return (
+            <View>
+            <View style={styles.navbar}>
+                <TouchableOpacity onPress={() => {navigation.navigate('HomeTrainee')}} style={{width:"33%"}}>
+                <View style={styles.item1}>
+                    <Ionicons name="chatbox-ellipses-outline" size={40} color="#00a9e0" />
+                    <Text style={styles.text}>Chat</Text>
+                </View>
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={() => navigation.navigate('CalendarTrainee')} style={{width:"33%"}}>
+                <View style={styles.item2}>
+                    <Ionicons name="calendar-outline" size={40} color="#00a9e0" />
+                    <Text style={styles.text}>Kalendár</Text>
+                </View>
+                </TouchableOpacity>
+    
+                <TouchableOpacity style={{width:"33%", backgroundColor:"#00a9e0"}} onPress={() => navigation.navigate('ProfileTrainee')}>
+                <View style={styles.item3}>
+                    <Ionicons name="person-outline" size={40} color="white" />
+                    <Text style={{fontSize:15, fontWeight:"bold", color:"white"}}>Profil</Text>
                 </View>
                 </TouchableOpacity>
             </View>
@@ -91,7 +120,7 @@ const NavbarTrainee = () => {
                 </View>
                 </TouchableOpacity>
     
-                <TouchableOpacity style={{width:"33%"}}>
+                <TouchableOpacity style={{width:"33%"}} onPress={() => navigation.navigate('ProfileTrainee')}>
                 <View style={styles.item3}>
                     <Ionicons name="person-outline" size={40} color="#00a9e0" />
                     <Text style={styles.text}>Profil</Text>
