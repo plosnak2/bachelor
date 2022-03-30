@@ -80,7 +80,9 @@ const ChatTrainer = ({ navigation, route }) => {
                                             <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.traineePhoto}>
                                                 <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold", color:"white"}}>Kategória: {message.category}</Text>
-                                                <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                                <TouchableOpacity onPress={() => navigation.navigate('PhotoSettings', {photo: message.photo})}>
+                                                    <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                                </TouchableOpacity>
                                             </View>
                                         </View>
                                         {(() => {
