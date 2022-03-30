@@ -42,20 +42,6 @@ const HomeTrainer = ({ navigation }) => {
       
     }, [navigation])
 
-    const handleSignOut= () =>{
-      auth
-        .signOut()
-        .then(() => {
-            AsyncStorage.removeItem('email');
-            
-        })
-        .then(() => {
-            navigation.replace('Login')
-        
-        })
-        .catch(error => alert(error.message))
-    }
-
     if(loading){
         return( 
             <View style={[styles.container2, styles.horizontal]}>
@@ -93,7 +79,7 @@ const HomeTrainer = ({ navigation }) => {
                 
             </TouchableOpacity>
 
-            <TouchableOpacity style={{marginTop:30}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
+            
           </ScrollView>
           <NavbarTrainer />
         </View>
