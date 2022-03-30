@@ -20,23 +20,28 @@ const GaleryTrainer = ({ navigation }) => {
     const [oldName, setOldName] = useState('')
     const [newName, setNewName] = useState('')
     const [showSpinner, setShowSpinner] = useState(false);
+    const [catIds, setCatIds] = useState({})
 
     useEffect(async () => {
         const subscribe = PhotosRef.orderBy("date", "desc").onSnapshot((QuerySnapshot) => {
             let photosActual = [];
             let categoriesActual = {};
+            let ids = {}
             QuerySnapshot.forEach((doc) => {
                 let category = doc.data().category
                 if(category in categoriesActual === false){
                     categoriesActual[category] = [doc.data().photourl]
+                    ids[category] = [doc.id]
                 } else {
                     categoriesActual[category].push(doc.data().photourl)
+                    ids[category].push(doc.id)
                 }
                 photosActual.push(doc.data())
                 
             })
             setPhotos(photosActual);
             setCategories(categoriesActual)
+            setCatIds(ids)
             setLoaded(true)
             
         })
@@ -99,9 +104,11 @@ const GaleryTrainer = ({ navigation }) => {
                                         </View>
                                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, marginTop:15, borderBottomColor:"#00a9e0"}}>
                                         {
-                                            value.map(url => {
+                                            value.map((url, index) => {
                                                 return(
-                                                    <Image source={{ uri: url }} style={{ width: 100, height: 100, marginRight:10}} />
+                                                    <TouchableOpacity onPress={() => navigation.navigate('PhotoSettings', {photo: catIds[key][index]})}>
+                                                        <Image source={{ uri: url }} style={{ width: 100, height: 100, marginRight:10}} />
+                                                    </TouchableOpacity>
                                                 )
                                             })
                                         }
