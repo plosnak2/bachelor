@@ -45,6 +45,9 @@ export default function App() {
           },
           headerTintColor:"white",
           headerTitleAlign: 'center',
+          gestureEnabled: false,
+          headerShown: true,
+          headerLeft: () => <></>,
         }}/>
         <Stack.Screen name="HomeTrainer" component={HomeTrainer} options={{
           title: 'Moji športovci',
@@ -52,7 +55,10 @@ export default function App() {
            backgroundColor: '#00a9e0',
          },
          headerTitleAlign: 'center',
-         headerTintColor:"white"
+         headerTintColor:"white",
+         gestureEnabled: false,
+         headerShown: true,
+         headerLeft: () => <></>,
        }}/>
        <Stack.Screen name="ChatTrainee" component={ChatTrainee} options={({ route, navigation }) => ({ 
          title: route.params.name,
@@ -204,6 +210,9 @@ export default function App() {
     headerShown: true,
     headerTintColor:"white",
     headerTitleAlign: 'center',
+    gestureEnabled: false,
+    headerShown: true,
+    headerLeft: () => <></>,
   })}/>
     <Stack.Screen name="ProfileTrainee" component={ProfileTrainee} options={({}) => ({
       title: 'Profil',
@@ -213,6 +222,9 @@ export default function App() {
     headerShown: true,
     headerTintColor:"white",
     headerTitleAlign: 'center',
+    gestureEnabled: false,
+    headerShown: true,
+    headerLeft: () => <></>,
   })}/>
       </Stack.Navigator>
     </NavigationContainer>

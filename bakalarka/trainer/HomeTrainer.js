@@ -36,6 +36,12 @@ const HomeTrainer = ({ navigation }) => {
         AsyncStorage.setItem('traineePhoto', trainee.data().profilephoto)
         AsyncStorage.setItem('traineeName', trainee.data().name)
         setLoading(false)
+
+        navigation.addListener('beforeRemove', (e) => {
+          
+          // Prevent default behavior of leaving the screen
+          e.preventDefault();
+        })
       });
 
       return unsubscribe;

@@ -32,6 +32,12 @@ const HomeTrainee = ({ navigation }) => {
             AsyncStorage.setItem('coachPhoto', coach.data().profilephoto)
             AsyncStorage.setItem('coachName', coach.data().name)
             AsyncStorage.setItem('myPhoto', user.data().profilephoto)
+
+            navigation.addListener('beforeRemove', (e) => {
+                
+                // Prevent default behavior of leaving the screen
+                e.preventDefault();
+            })
         });
         return unsubscribe;
     }, [navigation])
