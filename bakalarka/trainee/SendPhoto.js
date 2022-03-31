@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, TextInput, Keyboard, KeyboardAvoidingView, Alert, Dimensions, LogBox } from "react-native";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { storage } from "../firebasecfg";
 import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
 import { PhotosRef } from "../firebasecfg";
@@ -21,6 +21,14 @@ const SendPhoto = ({ navigation, route }) => {
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([]);
 
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
+
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
             LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
@@ -35,6 +43,9 @@ const SendPhoto = ({ navigation, route }) => {
         })
 
         navigation.addListener('beforeRemove', (e) => {
+            if(fromHereRef.current == "a"){
+                return;
+            }
             // Prevent default behavior of leaving the screen
             e.preventDefault();
     
@@ -124,6 +135,7 @@ const SendPhoto = ({ navigation, route }) => {
                 setShowSpinner(false)
             } finally {
                 blob.close();
+                setFromHere("a")
                 navigation.navigate('ChatTrainee',{name: coachName})
             }
         }
