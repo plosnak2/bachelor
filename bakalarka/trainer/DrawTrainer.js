@@ -43,6 +43,14 @@ export default function DrawTrainer({navigation, route}){
     const [showSpinner, setShowSpinner] = useState(false)
     const cardRef = useRef();
 
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
+
     React.useEffect(
       () =>
         navigation.addListener('beforeRemove', (e) => {
@@ -50,7 +58,10 @@ export default function DrawTrainer({navigation, route}){
             // If we don't have unsaved changes, then we don't need to do anything
             return;
           }
-  
+          
+          if(fromHereRef.current == "a"){
+            return;
+          }
           // Prevent default behavior of leaving the screen
           e.preventDefault();
   
@@ -150,6 +161,7 @@ export default function DrawTrainer({navigation, route}){
             const traineeName = await AsyncStorage.getItem('traineeName');
             blob.close();
             setShowSpinner(false)
+            setFromHere("a")
             navigation.navigate('ChatTrainer',{name: traineeName, message:""})
         }
         

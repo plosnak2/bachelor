@@ -24,6 +24,7 @@ const PhotoSettings = ({ navigation, route }) => {
     const [fromHere, _setFromHere] = useState('')
     const fromHereRef = useRef(fromHere);
     const [viewImage, setViewImage] = useState(false)
+    const [traineeName, setTraineeName] = useState('');
 
     const setComment = newText => {
         textRef.current = newText;
@@ -36,6 +37,8 @@ const PhotoSettings = ({ navigation, route }) => {
     };
 
     useEffect(async () => {
+        const result = await AsyncStorage.getItem('traineeName');
+        setTraineeName(result)
         const docpic = await PhotosRef.doc(actualId).get();
         setPhoto(docpic.data())
         setLoading(false)
@@ -111,7 +114,7 @@ const PhotoSettings = ({ navigation, route }) => {
                 message: "Tréner komentoval fotku: " + comment
             })
             setFromHere("a")
-            navigation.goBack();
+            navigation.navigate('ChatTrainer',{name: traineeName, message:""})
         }
     }
 
