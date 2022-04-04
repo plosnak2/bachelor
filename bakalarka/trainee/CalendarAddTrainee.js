@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, ScrollView, Button, LogBox, TextInput, Alert } from "react-native";
 import { auth } from '../firebase'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { UsersRef } from "../firebasecfg";
 import NavbarTrainee from "./Navbar";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
@@ -27,6 +27,14 @@ const CalendarAddTrainee = ({ navigation, route }) => {
     const [message, setMessage] = useState('')
     const [min, setMin] = useState(0)
 
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
+
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
             LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
@@ -40,6 +48,9 @@ const CalendarAddTrainee = ({ navigation, route }) => {
             setItems(trainings_data)  
         })
         navigation.addListener('beforeRemove', (e) => {
+            if(fromHereRef.current == "a"){
+                return;
+            }
             // Prevent default behavior of leaving the screen
             e.preventDefault();
     
@@ -103,6 +114,7 @@ const CalendarAddTrainee = ({ navigation, route }) => {
                     training: training
                 })
                 .then(() => {
+                    setFromHere("a")
                     navigation.navigate('CalendarTrainee')
                 })
             }
