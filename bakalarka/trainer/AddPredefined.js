@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, TextInput, Keyboard, KeyboardAvoidingView, Alert } from "react-native";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import NavbarTrainer from "./Navbar";
 import { PredefinedRef } from "../firebasecfg";
 
@@ -10,11 +10,23 @@ const AddPredefined = ({ navigation, route }) => {
     const hasUnsavedChangesName = Boolean(name);
     const hasUnsavedChangesMessage = Boolean(message);
 
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
+
     React.useEffect(
         () =>
           navigation.addListener('beforeRemove', (e) => {
             if (!hasUnsavedChangesName && !hasUnsavedChangesMessage) {
               // If we don't have unsaved changes, then we don't need to do anything
+              return;
+            }
+
+            if(fromHereRef.current == "a"){
               return;
             }
     
@@ -50,6 +62,7 @@ const AddPredefined = ({ navigation, route }) => {
                 usage: 0
             })
             .then((docRef) => {
+                setFromHere("a")
                 navigation.replace('PredefinedTrainer')
             })
         }
