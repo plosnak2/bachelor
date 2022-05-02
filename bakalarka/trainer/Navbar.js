@@ -2,38 +2,93 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core'
+import { useEffect, useState } from 'react'
+import { useRoute } from '@react-navigation/native';
 
 // navigačný panel pre trénera
 const NavbarTrainer = () => {
     const navigation = useNavigation()
-    return (
-        <View>
-        <View style={styles.navbar}>
-            <TouchableOpacity onPress={() => navigation.navigate('HomeTrainer')}>
-            <View style={styles.item1}>
-                <Ionicons name="chatbox-ellipses-outline" size={40} color="black" />
-                <Text style={styles.text}>Chat</Text>
-            </View>
-            </TouchableOpacity>
-            
-            <TouchableOpacity onPress={() => navigation.navigate('PredefinedTrainer')}>
-            <View style={styles.item2}>
-                <Ionicons name="chatbubble-outline" size={40} color="black" />
-                <Text style={styles.text}>Uložené odpovede</Text>
-            </View>
-            </TouchableOpacity>
+    const route = useRoute();
 
-            <TouchableOpacity>
-            <View style={styles.item3}>
-                <Ionicons name="person-outline" size={40} color="black" />
-                <Text style={styles.text}>Profil</Text>
+    useEffect( () => {
+        
+        
+      }, [navigation])
+
+    if(route.name == "HomeTrainer"){
+        return(
+            <View>
+            <View style={styles.navbar}>
+                <TouchableOpacity onPress={() => navigation.navigate('HomeTrainer')} style={{width:"50%", backgroundColor:"#00a9e0"}}>
+                <View style={styles.item1}>
+                    <Ionicons name="chatbox-ellipses-outline" size={40} color="white" />
+                    <Text style={{fontSize:15, fontWeight:"bold", color:"white"}}>Chat</Text>
+                </View>
+                </TouchableOpacity>
+                
+                
+
+                <TouchableOpacity style={{width:"50%"}} onPress={() => navigation.navigate('ProfileTrainer')}>
+                <View style={styles.item3}>
+                    <Ionicons name="person-outline" size={40} color="#00a9e0" />
+                    <Text style={styles.text}>Profil</Text>
+                </View>
+                </TouchableOpacity>
             </View>
-            </TouchableOpacity>
-        </View>
-        
-        </View>
-        
-    )
+            
+            </View>
+        )
+    } else if(route.name == "ProfileTrainer") {
+        return (
+            <View>
+            <View style={styles.navbar}>
+                <TouchableOpacity onPress={() => navigation.navigate('HomeTrainer')} style={{width:"50%"}}>
+                <View style={styles.item1}>
+                    <Ionicons name="chatbox-ellipses-outline" size={40} color="#00a9e0" />
+                    <Text style={styles.text}>Chat</Text>
+                </View>
+                </TouchableOpacity>
+                
+                
+
+                <TouchableOpacity style={{width:"50%", backgroundColor:"#00a9e0"}} onPress={() => navigation.navigate('ProfileTrainer')}>
+                <View style={styles.item3}>
+                    <Ionicons name="person-outline" size={40} color="white" />
+                    <Text style={{fontSize:15, fontWeight:"bold", color:"white"}}>Profil</Text>
+                </View>
+                </TouchableOpacity>
+            </View>
+            
+            </View>
+        )
+    } else {
+        return (
+            
+
+            <View>
+            <View style={styles.navbar}>
+                <TouchableOpacity onPress={() => navigation.navigate('HomeTrainer')} style={{width:"50%"}}>
+                <View style={styles.item1}>
+                    <Ionicons name="chatbox-ellipses-outline" size={40} color="#00a9e0" />
+                    <Text style={styles.text}>Chat</Text>
+                </View>
+                </TouchableOpacity>
+                
+                
+
+                <TouchableOpacity style={{width:"50%"}} onPress={() => navigation.navigate('ProfileTrainer')}>
+                <View style={styles.item3}>
+                    <Ionicons name="person-outline" size={40} color="#00a9e0" />
+                    <Text style={styles.text}>Profil</Text>
+                </View>
+                </TouchableOpacity>
+            </View>
+            
+            </View>
+            
+        )
+    }
+    
 }
 
 export default NavbarTrainer
@@ -46,14 +101,13 @@ const styles = StyleSheet.create({
         right: 0,
         alignSelf: 'stretch',
         flex: 1,
-        backgroundColor: '#c4c4c4',
+        backgroundColor: 'lightgrey',
         height: 70,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:40,
-        paddingRight:40,
+        
         width: "100%",
-        paddingTop:5,
+        
       
     },
     item1:{
@@ -69,6 +123,6 @@ const styles = StyleSheet.create({
     text:{
         fontSize:15,
         fontWeight: 'bold',
-        color: 'black'
+        color: '#00a9e0'
     }
 })

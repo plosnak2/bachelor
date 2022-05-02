@@ -4,42 +4,43 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import { UsersRef } from "../firebasecfg";
 import NavbarTrainee from "./Navbar";
-
+import { ChatRef } from "../firebasecfg";
 
 // domovska obrazovka sportovca
 const HomeTrainee = ({ navigation }) => {
     const [coachName, setCoachName] = useState('');
     const [coachPhoto, setCoachPhoto] = useState('');
     const [loaded, setLoaded] = useState(false);
+    const [lastMessage, setLastMessage] = useState('');
 
     // ziskanie hlavnych informáci o trenerovi: mail a fotka
     useEffect(async () => {
-        const result = await AsyncStorage.getItem('email');
-        const user = await UsersRef.doc(result).get();
-        const coachref = user.data().coachref;
-        const coach = await UsersRef.doc(coachref).get();
-        setCoachName(coach.data().name)
-        setCoachPhoto(coach.data().profilephoto)
-        setLoaded(true);
-        AsyncStorage.setItem('coachPhoto', coach.data().profilephoto)
-        AsyncStorage.setItem('coachName', coach.data().name)
-        AsyncStorage.setItem('myPhoto', user.data().profilephoto)
-    }, [])
+        const unsubscribe = navigation.addListener('focus', async () => {
+            const result = await AsyncStorage.getItem('email');
+            const user = await UsersRef.doc(result).get();
+            const coachref = user.data().coachref;
+            const coach = await UsersRef.doc(coachref).get();
+            const query = await ChatRef.orderBy("date", "desc").limit(1).get();
+            if(query.docs[0].data().isPhoto === true) {
+                setLastMessage("Uživateľ odoslal fotku")
+            } else {
+                setLastMessage(query.docs[0].data().message)
+            }
+            setCoachName(coach.data().name)
+            setCoachPhoto(coach.data().profilephoto)
+            setLoaded(true);
+            AsyncStorage.setItem('coachPhoto', coach.data().profilephoto)
+            AsyncStorage.setItem('coachName', coach.data().name)
+            AsyncStorage.setItem('myPhoto', user.data().profilephoto)
 
-    // dočasna funckia pre odhlásenie
-    const handleSignOut= () =>{
-      auth
-        .signOut()
-        .then(() => {
-            AsyncStorage.removeItem('email');
-            
-        })
-        .then(() => {
-            navigation.replace('Login')
-        
-        })
-        .catch(error => alert(error.message))
-    }
+            navigation.addListener('beforeRemove', (e) => {
+                
+                // Prevent default behavior of leaving the screen
+                e.preventDefault();
+            })
+        });
+        return unsubscribe;
+    }, [navigation])
 
     // pokial niesu ziskane informácie tak vraciam loader
     if(!loaded){
@@ -52,14 +53,15 @@ const HomeTrainee = ({ navigation }) => {
         return (
             <View style={{flex:1}}>
                 <ScrollView style={styles.container}>
-                    <View style={{alignItems:"center"}}>
-                        <Text style={styles.name}>{coachName}</Text>
+                    
+
+                    <TouchableOpacity style={{width:"90%", backgroundColor:"#00a9e0", alignSelf:"center", marginTop:50, borderRadius:5, flexDirection:"row", padding:10}} onPress={() => navigation.navigate('ChatTrainee',{name: coachName})}>
                         <Image source={{uri: coachPhoto}} style={styles.profilePhoto}/>
-                        <TouchableOpacity style={styles.wrapper} onPress={() => navigation.navigate('ChatTrainee',{name: coachName})}>
-                            <Text style={styles.wrapperedtext}>Otvoriť chat</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{marginTop:100}} onPress={handleSignOut}><Text>odhlasit</Text></TouchableOpacity>
-                    </View>
+                        <View style={{flexDirection:"column", marginLeft:20, width:"60%"}}>
+                            <Text style={{fontSize:17, fontWeight:"bold", color:"white"}}>{coachName}</Text>
+                            <Text style={{color:"white"}} numberOfLines={2}>{lastMessage}</Text>
+                        </View>
+                    </TouchableOpacity>
                 </ScrollView>
                 <NavbarTrainee />
             </View>
@@ -81,11 +83,11 @@ const styles = StyleSheet.create({
     },
 
     profilePhoto:{
-        width: 120,
-        height: 120,
+        width: 70,
+        height: 70,
         borderRadius: 100,
-        marginTop: 20
-    },
+        
+      },
 
     horizontal: {
         flexDirection: "row",
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     },
 
     wrapper:{
-        backgroundColor:'#c4c4c4',
+        backgroundColor:'#3ca0e7',
         marginTop:30,
         borderRadius:100,
         padding:15,

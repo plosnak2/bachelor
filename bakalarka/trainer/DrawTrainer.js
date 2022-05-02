@@ -23,7 +23,7 @@ import Svg, {
 
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions, Text, TouchableOpacity, Alert } from 'react-native';
 import { captureRef } from "react-native-view-shot";
 import firebase from "firebase";
 import "firebase/firestore";
@@ -43,9 +43,46 @@ export default function DrawTrainer({navigation, route}){
     const [showSpinner, setShowSpinner] = useState(false)
     const cardRef = useRef();
 
-    useEffect(async () => {
-      console.log(route.params.category)
-    }, [])
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
+
+    React.useEffect(
+      () =>
+        navigation.addListener('beforeRemove', (e) => {
+          if (lines.length == 0) {
+            // If we don't have unsaved changes, then we don't need to do anything
+            return;
+          }
+          
+          if(fromHereRef.current == "a"){
+            return;
+          }
+          // Prevent default behavior of leaving the screen
+          e.preventDefault();
+  
+          // Prompt the user before leaving the screen
+          Alert.alert(
+            'Vymazať zmeny?',
+            'Prajete si vážne opustiť túto obrazovku?',
+            [
+              { text: "Zostať", style: 'cancel', onPress: () => {} },
+              {
+                text: 'Opustiť',
+                style: 'destructive',
+                // If the user confirmed, then we dispatch the action we blocked earlier
+                // This will continue the action that had triggered the removal of the screen
+                onPress: () => navigation.dispatch(e.data.action),
+              },
+            ]
+          );
+        }),
+      [navigation]
+    );
 
     function touch(e){
       const tmp = points + " " + Math.trunc(e.nativeEvent.locationX) + "," + Math.trunc(e.nativeEvent.locationY)
@@ -124,6 +161,7 @@ export default function DrawTrainer({navigation, route}){
             const traineeName = await AsyncStorage.getItem('traineeName');
             blob.close();
             setShowSpinner(false)
+            setFromHere("a")
             navigation.navigate('ChatTrainer',{name: traineeName, message:""})
         }
         

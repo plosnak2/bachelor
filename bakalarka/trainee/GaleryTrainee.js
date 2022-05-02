@@ -45,7 +45,7 @@ const GaleryTrainee = ({ navigation }) => {
         <View style={{flex:1}}>
                 <ScrollView style={styles.container}>
                     <Text style={{fontSize:17, fontWeight:"bold"}}>Všetky fotky</Text>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20}}>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, borderBottomColor:"#00a9e0"}}>
                         {
                             photos.map(photo => {
                                 return(
@@ -60,14 +60,14 @@ const GaleryTrainee = ({ navigation }) => {
                                 return(
                                     <View>
                                         <Text style={{fontSize:17, fontWeight:"bold", marginTop:10}}>{key}</Text>
-                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20}}>
+                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{borderBottomWidth:1, paddingBottom:20, borderBottomColor:"#00a9e0"}}>
                                         {
                                             value.map((url, index) => {
                                                 if(url.commented == true){
                                                     return(
                                                         <TouchableOpacity onPress={() => navigation.navigate('EditedImagesTrainee', {docId: catIds[key][index]})}>
                                                             <Image source={{ uri: url.photourl }} style={{ width: 100, height: 100, marginRight:10}} />
-                                                            <Ionicons name="notifications" size={40} color="red" style={{ position: 'absolute', bottom: 0, right: 10 }}/>
+                                                            <Ionicons name="notifications" size={25} color="#00a9e0" style={{ position: 'absolute', bottom: 3, right: 15 }}/>
                                                         </TouchableOpacity>
                                                     )
                                                 } else {

@@ -40,15 +40,20 @@ const ChatTrainer = ({ navigation, route }) => {
     }, [route])
 
     function sendMessage(){
-       ChatRef.add({
-            date: new Date(),
-            from: email,
-            isPhoto: false,
-            message: message
-        })
-        .then((docRef) => {
-            setMessage('');
-        })
+        if(message === ""){
+
+        } else {
+            ChatRef.add({
+                date: new Date(),
+                from: email,
+                isPhoto: false,
+                message: message
+            })
+            .then((docRef) => {
+                setMessage('');
+            })
+        }
+       
     }
 
     if(!loaded){
@@ -74,8 +79,10 @@ const ChatTrainer = ({ navigation, route }) => {
                                         <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.traineePhoto}>
-                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
-                                                <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold", color:"white"}}>Kategória: {message.category}</Text>
+                                                <TouchableOpacity onPress={() => navigation.navigate('PhotoSettings', {photo: message.photo})}>
+                                                    <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
+                                                </TouchableOpacity>
                                             </View>
                                         </View>
                                         {(() => {
@@ -101,7 +108,7 @@ const ChatTrainer = ({ navigation, route }) => {
                                     <View style={{flexDirection:"row-reverse", alignItems:"center", marginLeft:5}}>
                                         <Image source={{uri: myPhoto}} style={styles.profilePhoto}/>
                                         <View style={styles.trainee}>
-                                            <Text>{message.message}</Text>
+                                            <Text style={{color:"white"}}>{message.message}</Text>
                                         </View>
                                         <TouchableOpacity onPress={() => navigation.navigate('AddPredefined', {message: message.message})}>
                                             <Ionicons name='pin' size={35}/>
@@ -131,7 +138,7 @@ const ChatTrainer = ({ navigation, route }) => {
                                         <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainerPhoto}>
-                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold"}}>Kategória: {message.category}</Text>
+                                                <Text style={{textAlign:"center", paddingBottom:10, fontWeight:"bold", color:"white"}}>Kategória: {message.category}</Text>
                                                 <TouchableOpacity onPress={() => navigation.navigate('PhotoSettings', {photo: message.photo})}>
                                                 <Image source={{ uri: message.message }} style={{ width: 200, height: 300, resizeMode:"contain" }} />
                                                 </TouchableOpacity>
@@ -160,7 +167,7 @@ const ChatTrainer = ({ navigation, route }) => {
                                         <View style={{flexDirection:"row", alignItems:"center", marginLeft:5}}>
                                             <Image source={{uri: traineePhoto}} style={styles.profilePhoto}/>
                                             <View style={styles.trainer}>
-                                                <Text>{message.message}</Text>
+                                                <Text style={{color:"white"}}>{message.message}</Text>
                                             </View>
                                         </View>
                                         {(() => {
@@ -194,8 +201,8 @@ const ChatTrainer = ({ navigation, route }) => {
             </View>
             <View>
                 <TextInput style={styles.input} placeholder="Napíšte správu" onPressIn={ () => scrollViewRef.current.scrollToEnd({animated: true})} onChangeText={newText => setMessage(newText)} value={message} multiline/>
-                <TouchableOpacity style={{position:"absolute", bottom:10, right:15}} onPress={sendMessage}>
-                    <Ionicons name='send' size={30} />
+                <TouchableOpacity style={{position:"absolute", bottom:10, right:"7%"}} onPress={sendMessage}>
+                    <Ionicons name='send' size={30} color="#00a9e0"/>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -228,7 +235,7 @@ const styles = StyleSheet.create({
     panel:{
         width:"100%",
         height:40,
-        backgroundColor:"#c4c4c4",
+        backgroundColor:"#00a9e0",
         borderTopWidth:1,
         flexDirection:"row",
         marginBottom:50,
@@ -245,7 +252,7 @@ const styles = StyleSheet.create({
 
     traineePhoto:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"#00a9e0",
         padding:10,
         alignSelf : 'flex-end',
         marginRight:5,
@@ -255,7 +262,7 @@ const styles = StyleSheet.create({
 
     trainee:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"#00a9e0",
         padding:15,
         alignSelf : 'flex-end',
         marginRight:5,
@@ -265,7 +272,7 @@ const styles = StyleSheet.create({
 
     trainerPhoto:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"grey",
         padding:10,
         alignSelf : 'flex-start',
         marginLeft:5,
@@ -275,7 +282,7 @@ const styles = StyleSheet.create({
 
     trainer:{
         maxWidth:"60%",
-        backgroundColor:"lightblue",
+        backgroundColor:"grey",
         padding:15,
         alignSelf : 'flex-start',
         marginLeft:5,
@@ -286,12 +293,19 @@ const styles = StyleSheet.create({
     input:{
         position:"absolute",
         bottom:0,
-        width:"100%",
+        width:"90%",
         backgroundColor:"white",
-        height:50,
+        height: 48,
         borderTopWidth:1,
         paddingLeft:15,
-        paddingRight:50
+        paddingRight:50,
+        borderWidth:1,
+        alignSelf:"center",
+        borderColor:"#00a9e0",
+        borderRadius:100,
+        paddingTop:5,
+        paddingBottom:5,
+        marginBottom:1
     },
     container: {
         flex: 1,

@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Image, TextInput, Keyboard, KeyboardAvoidingView, Alert, Dimensions, LogBox } from "react-native";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { storage } from "../firebasecfg";
 import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
 import { PhotosRef } from "../firebasecfg";
@@ -21,6 +21,14 @@ const SendPhoto = ({ navigation, route }) => {
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([]);
 
+    const [fromHere, _setFromHere] = useState('')
+    const fromHereRef = useRef(fromHere);
+
+    const setFromHere = newText => {
+        fromHereRef.current = newText;
+        _setFromHere(newText);
+    };
+
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
             LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
@@ -33,6 +41,30 @@ const SendPhoto = ({ navigation, route }) => {
             })
             setItems(exercises_data)  
         })
+
+        navigation.addListener('beforeRemove', (e) => {
+            if(fromHereRef.current == "a"){
+                return;
+            }
+            // Prevent default behavior of leaving the screen
+            e.preventDefault();
+    
+            // Prompt the user before leaving the screen
+            Alert.alert(
+              'Vymazať zmeny?',
+              'Prajete si vážne opustiť túto obrazovku?',
+              [
+                { text: "Zostať", style: 'cancel', onPress: () => {} },
+                {
+                  text: 'Opustiť',
+                  style: 'destructive',
+                  // If the user confirmed, then we dispatch the action we blocked earlier
+                  // This will continue the action that had triggered the removal of the screen
+                  onPress: () => navigation.dispatch(e.data.action),
+                },
+              ]
+            );
+          })
       }, [])
 
     // https://stackoverflow.com/questions/60753537/how-to-upload-image-to-firebase-in-expo-react-native
@@ -103,6 +135,7 @@ const SendPhoto = ({ navigation, route }) => {
                 setShowSpinner(false)
             } finally {
                 blob.close();
+                setFromHere("a")
                 navigation.navigate('ChatTrainee',{name: coachName})
             }
         }
@@ -133,16 +166,16 @@ const SendPhoto = ({ navigation, route }) => {
             </View>
         }
         
-        <View style={{borderBottomWidth:1, marginTop:20}}></View>
+        <View style={{borderBottomWidth:1, marginTop:20, borderBottomColor:"#00a9e0"}}></View>
             {showSpinner && <OverlaySpinner />}
             <View style={styles.image}>
                 {imageUri && <Image source={{ uri: imageUri }} style={{ width: "100%", height: "100%", resizeMode:"contain" }} />}
             </View>
-            <View style={{borderBottomWidth:1, marginTop:20}}></View>
+            <View style={{borderBottomWidth:1, marginTop:20, borderBottomColor:"#3ca0e7"}}></View>
             
             
             <TouchableOpacity style={styles.button} onPress={uploadImageToBucket}>
-                <Text style={{fontWeight:"bold", fontSize:20}}>Odoslať fotku</Text>
+                <Text style={{fontWeight:"bold", fontSize:20, color:"white"}}>Odoslať fotku</Text>
             </TouchableOpacity>
         </ScrollView>
     </View>
@@ -175,11 +208,11 @@ const styles = StyleSheet.create({
         width:"80%",
         alignItems:"center",
         marginLeft:"10%",
-        backgroundColor: "#c4c4c4",
+        backgroundColor: "#00a9e0",
         marginTop:20,
         height:50,
         justifyContent:"center",
-        borderRadius:100,
+        borderRadius:10,
         marginBottom:50
     }
 })
