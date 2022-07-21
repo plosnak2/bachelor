@@ -22,7 +22,7 @@ in one place, where they can be found very easily.
 
 ### Predefined messages
 <p align="center">
-  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/predefined1.png?raw=true" width="30%">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_predefined1.png?raw=true" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/predefined2.png?raw=true" width="30%">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_predefined2.png?raw=true" width="30%">
 </p>
