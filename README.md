@@ -40,7 +40,19 @@ in one place, where they can be found very easily.
 
 ### Galery
 - One of the most special features of this application is galery. Where you can see that photos are not only in chronological order as in other social chat apps, but also they are categorized by type of workout.
+- Trainer can also change name of workout type by clicking on the pencil icon.
 <p align="center">
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_galery2.png?raw=true" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
+</p>
+
+## Screenshots - Trainee view
+### Calendar
+- Trainee is able to track information about his workouts. He can set type of workout, length, and also the most important things for trainers - his feelings after training.
+- On the left you can see how this calendar looks.
+- On the right is form for creating training.
+ <p align="center">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_calendar.png?raw=true" width="30%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_add_calendar.png?raw=true" width="30%">
 </p>
