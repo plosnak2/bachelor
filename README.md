@@ -12,5 +12,5 @@ in one place, where they can be found very easily.
 
 ## Screenshots - Trainer view
 ### Home screen and chat from trainers point of view
-<img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_home1.png?raw=true" width="50%" height="100%">
-<img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_chat_trainer.png?raw=true" width="50%" height="100%">
+<img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_home1.png?raw=true" width="30%" height="100%">
+<img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_chat_trainer.png?raw=true" width="30%" height="100%">
