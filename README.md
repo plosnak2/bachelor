@@ -21,8 +21,19 @@ in one place, where they can be found very easily.
 </p>
 
 ### Predefined messages
+- Trainer is able to save messages for future use, so he can easily save time and he doesn´t have to write same message for same problems again and again.
 <p align="center">
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_predefined1.png?raw=true" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_predefined2.png?raw=true" width="30%">
+</p>
+
+### Feedback from trainer
+- Trainer is able to give adequate feedback to his trainee by drawing into his photo (for example some arrows) or he can also add text message to his photo, so trinee can find this comment easily.
+- In the left picture you can see drawing into photo.
+- In the right picture you can see settings of photo, where trainer is able to left comment. 
+<p align="center">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_draw.png?raw=true" width="30%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_settings.png?raw=true" width="30%">
 </p>
