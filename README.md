@@ -37,3 +37,10 @@ in one place, where they can be found very easily.
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_settings.png?raw=true" width="30%">
 </p>
+
+### Galery
+- One of the most special features of this application is galery. Where you can see that photos are not only in chronological order as in other social chat apps, but also they are categorized by type of workout.
+<p align="center">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_galery2.png?raw=true" width="30%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+</p>
