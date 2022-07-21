@@ -65,3 +65,13 @@ in one place, where they can be found very easily.
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_edited2.png?raw=true" width="30%">
 </p>
+
+### Sending photo
+- When trainee is sending photo of his workout into the chat, he needs to specify also type of this workout.
+- That is because of filtering in the gallery and also it is easy to find exact photo after that.
+- App is using smart dropdown which offers workouts that have already been used and if you want to add new one, just click on the "Pridať nový" button.
+<p align="center">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_send_photo.png?raw=true" width="30%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_dropdown.png?raw=true" width="30%">
+</p>
