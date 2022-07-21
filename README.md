@@ -12,10 +12,17 @@ in one place, where they can be found very easily.
 
 ## Screenshots - Trainer view
 ### Home screen and chat from trainers point of view
+- Home screen (on the left) shows last message and also information about last training.
+- Chat on the right acts like normal social chat application, where you can see messages and also special button on the bottom "Uložené odpovede".
 <p align="center">
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_home1.png?raw=true" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_chat_trainer.png?raw=true" width="30%">
 </p>
-<img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_home1.png?raw=true" width="30%" height="100%">
-<img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/app_chat_trainer.png?raw=true" width="30%" height="100%">
+
+### Predefined messages
+<p align="center">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/predefined1.png?raw=true" width="30%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainer/predefined2.png?raw=true" width="30%">
+</p>
