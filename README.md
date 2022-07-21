@@ -56,3 +56,12 @@ in one place, where they can be found very easily.
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_add_calendar.png?raw=true" width="30%">
 </p>
+
+### Edited photos from trainer
+- Trainee is able to see edited images or also text comments that his trainer added yo his image of workout.
+- He is able to find it really quick.
+ <p align="center">
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_edited1.png?raw=true" width="30%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/plosnak2/bachelor/blob/main/screenshots/trainee/app_edited2.png?raw=true" width="30%">
+</p>
